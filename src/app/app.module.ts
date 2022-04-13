@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import {ProductListComponent} from "./component/customer/product-list/product-list.component";
+import { SortByTopSaleComponent } from './component/sort-by-top-sale/sort-by-top-sale.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     ProductListComponent,
-    FooterComponent
+    FooterComponent,
+    SortByTopSaleComponent
   ],
   imports: [
     BrowserModule,
