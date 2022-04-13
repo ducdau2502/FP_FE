@@ -6,7 +6,14 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import {ProductListComponent} from "./component/customer/product-list/product-list.component";
-import { ShopDetailComponent } from './customer/shop-detail/shop-detail.component';
+import { ShopDetailComponent } from './component/customer/shop-detail/shop-detail.component';
+import {HttpClientModule} from "@angular/common/http";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatTableModule} from "@angular/material/table";
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatButtonModule} from "@angular/material/button";
+import { ProductDetailComponent } from './component/customer/product-detail/product-detail.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -14,12 +21,20 @@ import { ShopDetailComponent } from './customer/shop-detail/shop-detail.componen
     HeaderComponent,
     ProductListComponent,
     FooterComponent,
-    ShopDetailComponent
+    ShopDetailComponent,
+    ProductDetailComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        AppRoutingModule,
+        MatTableModule,
+        MatButtonModule,
+        MatPaginatorModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        ReactiveFormsModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
