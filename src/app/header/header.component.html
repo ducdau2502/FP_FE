@@ -24,7 +24,7 @@
       <nav class="limiter-menu-desktop container">
 
         <!-- Logo desktop -->
-        <a href="#" class="logo">
+        <a [routerLink]="['/home']" class="logo">
           <img src="assets/images/icons/logo-01.png" alt="IMG-LOGO">
         </a>
 
@@ -32,19 +32,15 @@
         <div class="menu-desktop">
           <ul class="main-menu">
             <li class="active-menu">
-              <a href="index.html">Home</a>
+              <a [routerLink]="['/home']">Home</a>
             </li>
 
             <li>
-              <a href="product.html">Shop</a>
-            </li>
-
-            <li class="label1" data-label1="hot">
-              <a href="shoping-cart.html">Features</a>
+              <a href="shoping-cart.html">Cart</a>
             </li>
 
             <li>
-              <a href="blog.html">Blog</a>
+              <a href="blog.html">Đã mua</a>
             </li>
 
             <li>
@@ -130,22 +126,18 @@
 
     <ul class="main-menu-m">
       <li>
-        <a href="index.html">Home</a>
+        <a [routerLink]="['/home']">Home</a>
         <span class="arrow-main-menu-m">
 						<i class="fa fa-angle-right" aria-hidden="true"></i>
 					</span>
       </li>
 
       <li>
-        <a href="product.html">Shop</a>
+        <a href="shoping-cart.html">Cart</a>
       </li>
 
       <li>
-        <a href="shoping-cart.html" class="label1 rs1" data-label1="hot">Features</a>
-      </li>
-
-      <li>
-        <a href="blog.html">Blog</a>
+        <a href="blog.html"> Đã mua</a>
       </li>
 
       <li>
