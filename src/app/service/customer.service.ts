@@ -5,6 +5,7 @@ import {Observable} from "rxjs";
 import {Product} from "../model/product";
 import {Store} from "../model/store";
 import {ProductFeedback} from "../model/product-feedback";
+import {StoreCategories} from "../model/storecategories";
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,18 @@ export class CustomerService {
 
   getAllProduct(): Observable<Product[]> {
     return this.http.get<Product[]>(this.API_HOME + `/showAllProduct`);
+  }
+
+  getAllStore(): Observable<Store[]> {
+    return this.http.get<Store[]>(this.API_HOME + `/showAllStore`);
+  }
+
+  getAllCategories(): Observable<StoreCategories[]> {
+    return this.http.get<StoreCategories[]>(this.API_HOME + `/list-category`);
+  }
+
+  findAllByCategoriesList_Id(id: any): Observable<Store[]> {
+    return this.http.get<Store[]>(this.API_HOME + `/find-store-by-category/${id}`);
   }
 
   getAllProductByStoreId(id: any): Observable<Product[]> {
@@ -51,6 +64,19 @@ export class CustomerService {
   searchProductByNameContaining(mess: string): Observable<Product[]> {
     let params = new HttpParams().set("name", mess);
     return this.http.get<Product[]>(this.API_HOME + `/search`, {params});
+  }
+
+  searchStoreByNameContaining(mess: string): Observable<Product[]> {
+    let params = new HttpParams().set("search-store", mess);
+    return this.http.get<Product[]>(this.API_HOME + `/search-stores`, {params});
+  }
+
+  topStoreSale(): Observable<Store[]> {
+    return this.http.get<Store[]>(this.API_HOME + '/top-store-sale')
+  }
+
+  topProductSale(): Observable<Product[]> {
+    return this.http.get<Product[]>(this.API_HOME + '/top-product-sale');
   }
 
 }

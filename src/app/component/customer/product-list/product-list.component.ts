@@ -68,4 +68,11 @@ export class ProductListComponent implements OnInit {
   saveId(id: any, name: string) {
     localStorage.setItem(name, id);
   }
+
+  //Hiển thị top sản phẩm được bán nhiều nhất
+  topProductSale() {
+    this.customerService.topProductSale().subscribe(products => {
+      this.products = products;
+    });
+  }
 }

@@ -14,7 +14,7 @@ import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatButtonModule} from "@angular/material/button";
 import { ProductDetailComponent } from './component/customer/product-detail/product-detail.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import { SortByTopSaleComponent } from './component/sort-by-top-sale/sort-by-top-sale.component';
+import { StoreListComponent } from './component/customer/store-list/store-list.component';
 
 
 @NgModule({
@@ -23,9 +23,9 @@ import { SortByTopSaleComponent } from './component/sort-by-top-sale/sort-by-top
     HeaderComponent,
     ProductListComponent,
     FooterComponent,
-    SortByTopSaleComponent,
     ShopDetailComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    StoreListComponent
   ],
     imports: [
         BrowserModule,

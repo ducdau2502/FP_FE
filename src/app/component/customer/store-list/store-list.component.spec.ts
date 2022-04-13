@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SortByTopSaleComponent } from './sort-by-top-sale.component';
+import { StoreListComponent } from './store-list.component';
 
-describe('SortByTopSaleComponent', () => {
-  let component: SortByTopSaleComponent;
-  let fixture: ComponentFixture<SortByTopSaleComponent>;
+describe('StoreListComponent', () => {
+  let component: StoreListComponent;
+  let fixture: ComponentFixture<StoreListComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SortByTopSaleComponent ]
+      declarations: [ StoreListComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SortByTopSaleComponent);
+    fixture = TestBed.createComponent(StoreListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
