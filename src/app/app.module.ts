@@ -7,6 +7,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import {ProductListComponent} from "./component/customer/product-list/product-list.component";
 import { SortByTopSaleComponent } from './component/sort-by-top-sale/sort-by-top-sale.component';
+import { ShopDetailComponent } from './component/customer/shop-detail/shop-detail.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { SortByTopSaleComponent } from './component/sort-by-top-sale/sort-by-top
     HeaderComponent,
     ProductListComponent,
     FooterComponent,
-    SortByTopSaleComponent
+    SortByTopSaleComponent,
+    ShopDetailComponent
   ],
   imports: [
     BrowserModule,
