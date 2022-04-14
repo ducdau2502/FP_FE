@@ -1,0 +1,44 @@
+<div class="container">
+  <button [routerLink]="['/ad-home']" class="btn btn-primary" id="submit">Back to list account</button>
+  <div class="row" style="margin-top: 20px">
+    <div class="col-12">
+      <div style="display: flex; justify-content: space-between">
+        <h1>View Account detail</h1>
+      </div>
+      <div class="row">
+        <p class="col-2">Name:</p> <p class="col-6"> {{account?.fullName}}</p>
+      </div>
+      <div class="row">
+        <p class="col-2">Age: </p> <p class="col-6"> {{account?.age}}</p>
+      </div>
+      <div class="row">
+        <p class="col-2">Gender: </p> <p class="col-6"> {{account?.gender}}</p>
+      </div>
+      <div class="row">
+        <p class="col-2">Address:</p> <p class="col-6"> {{account?.address}}</p>
+      </div>
+      <div class="row">
+        <p class="col-2">ID Card:</p> <p class="col-6"> {{account?.identityCard}}</p>
+      </div>
+      <div class="row">
+        <p class="col-2">Date Create:</p> <p class="col-6"> {{account?.dateCreate}}</p>
+    </div>
+      <div class="row">
+        <p class="col-2">Bank Account:</p> <p class="col-6"> {{account?.bankAccount}}</p>
+      </div>
+      <div class="row">
+        <p class="col-2">Status:</p> <p class="col-6"> {{account?.status}}</p>
+      </div>
+      <div class="row">
+        <p class="col-2">Username:</p> <p class="col-6"> {{account?.account?.username}}</p>
+      </div>
+      <div class="row">
+        <p class="col-2">Email:</p> <p class="col-6"> {{account?.account?.email}}</p>
+      </div>
+      <div class="row">
+        <p class="col-2">Avatar:</p> <img src="{{account?.avatar}}" alt="Error">
+      </div>
+
+    </div>
+  </div>
+</div>
