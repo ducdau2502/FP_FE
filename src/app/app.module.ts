@@ -14,7 +14,13 @@ import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatButtonModule} from "@angular/material/button";
 import { ProductDetailComponent } from './component/customer/product-detail/product-detail.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {StoreListComponent} from './component/customer/store-list/store-list.component';
+import { StoreListComponent } from './component/customer/store-list/store-list.component';
+import { LoginComponent } from './component/login/login.component';
+import { RegisterComponent } from './component/register/register.component';
+import { HomeComponent } from './component/home/home.component';
+import { SellerComponent } from './component/seller/seller.component';
+import { AdminComponent } from './component/admin/admin.component';
+import {authInterceptorProviders} from "./component/helpers/auth.interceptor";
 import {CreateProductComponent} from './component/seller/create-product/create-product.component';
 import {environment} from "../environments/environment";
 import {AngularFireStorageModule} from "@angular/fire/compat/storage";
@@ -35,12 +41,19 @@ import { AdAccountDetailComponent } from './component/admin/ad-account-detail/ad
     ShopDetailComponent,
     ProductDetailComponent,
     StoreListComponent,
+    LoginComponent,
+    RegisterComponent,
+    HomeComponent,
+    SellerComponent,
+    AdminComponent,
     CreateProductComponent,
     SProductListComponent,
     AdAccountListComponent,
     AdStoreListComponent,
     AdAccountDetailComponent
   ],
+
+  providers: [authInterceptorProviders],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -55,7 +68,6 @@ import { AdAccountDetailComponent } from './component/admin/ad-account-detail/ad
     AngularFireStorageModule,
     AngularFireDatabaseModule
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
