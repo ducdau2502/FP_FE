@@ -1,0 +1,42 @@
+<div class="container">
+
+  <h3 [routerLink]="['/ad-home']" style="display: inline-block; margin-right: 10px">List Account</h3>
+  <h3 [routerLink]="['/ad-store-list']" style="display: inline-block">List Store</h3>
+
+  <table class="table table-hover">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>Full Name</th>
+      <th>Age</th>
+      <th>Gender</th>
+      <th>Address</th>
+      <th>ID Card</th>
+      <th>Date Create</th>
+      <th>Bank Account</th>
+      <th>Status</th>
+      <th>Username</th>
+      <th>Email</th>
+      <th>Avatar</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let a of accounts; index as i">
+      <td> {{i + 1}} </td>
+      <td>
+        <a [routerLink]="['/ad-account-detail']" (click)="saveId(a.id, 'account_detail_id')"><ins>{{a.fullName}}</ins></a>
+      </td>
+      <td>{{a.age}}</td>
+      <td>{{a.gender}}</td>
+      <td>{{a.address}}</td>
+      <td>{{a.identityCard}}</td>
+      <td>{{a.dateCreate}}</td>
+      <td>{{a.bankAccount}}</td>
+      <td>{{a.status}}</td>
+      <td>{{a.account?.username}}</td>
+      <td>{{a.account?.email}}</td>
+      <td><img src="{{a.avatar}}" alt="Error"></td>
+    </tr>
+    </tbody>
+  </table>
+</div>

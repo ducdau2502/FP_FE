@@ -14,7 +14,16 @@ import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatButtonModule} from "@angular/material/button";
 import { ProductDetailComponent } from './component/customer/product-detail/product-detail.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import { StoreListComponent } from './component/customer/store-list/store-list.component';
+import {StoreListComponent} from './component/customer/store-list/store-list.component';
+import {CreateProductComponent} from './component/seller/create-product/create-product.component';
+import {environment} from "../environments/environment";
+import {AngularFireStorageModule} from "@angular/fire/compat/storage";
+import {AngularFireModule} from "@angular/fire/compat";
+import {AngularFireDatabaseModule} from "@angular/fire/compat/database";
+import { SProductListComponent } from './component/seller/s-product-list/s-product-list.component';
+import { AdAccountListComponent } from './component/admin/ad-account-list/ad-account-list.component';
+import { AdStoreListComponent } from './component/admin/ad-store-list/ad-store-list.component';
+import { AdAccountDetailComponent } from './component/admin/ad-account-detail/ad-account-detail.component';
 
 
 @NgModule({
@@ -25,19 +34,27 @@ import { StoreListComponent } from './component/customer/store-list/store-list.c
     FooterComponent,
     ShopDetailComponent,
     ProductDetailComponent,
-    StoreListComponent
+    StoreListComponent,
+    CreateProductComponent,
+    SProductListComponent,
+    AdAccountListComponent,
+    AdStoreListComponent,
+    AdAccountDetailComponent
   ],
-    imports: [
-        BrowserModule,
-        HttpClientModule,
-        AppRoutingModule,
-        MatTableModule,
-        MatButtonModule,
-        MatPaginatorModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        ReactiveFormsModule
-    ],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    AppRoutingModule,
+    MatTableModule,
+    MatButtonModule,
+    MatPaginatorModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireStorageModule,
+    AngularFireDatabaseModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
