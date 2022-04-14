@@ -15,6 +15,9 @@ import {MatButtonModule} from "@angular/material/button";
 import { ProductDetailComponent } from './component/customer/product-detail/product-detail.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { StoreListComponent } from './component/customer/store-list/store-list.component';
+import { AdAccountListComponent } from './component/admin/ad-account-list/ad-account-list.component';
+import { AdStoreListComponent } from './component/admin/ad-store-list/ad-store-list.component';
+import { AdAccountDetailComponent } from './component/admin/ad-account-detail/ad-account-detail.component';
 
 
 @NgModule({
@@ -25,7 +28,10 @@ import { StoreListComponent } from './component/customer/store-list/store-list.c
     FooterComponent,
     ShopDetailComponent,
     ProductDetailComponent,
-    StoreListComponent
+    StoreListComponent,
+    AdAccountListComponent,
+    AdStoreListComponent,
+    AdAccountDetailComponent
   ],
     imports: [
         BrowserModule,
