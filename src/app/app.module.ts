@@ -1,18 +1,18 @@
-import {NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 
-import {AppRoutingModule} from './app-routing.module';
-import {AppComponent} from './app.component';
-import {HeaderComponent} from './header/header.component';
-import {FooterComponent} from './footer/footer.component';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 import {ProductListComponent} from "./component/customer/product-list/product-list.component";
-import {ShopDetailComponent} from './component/customer/shop-detail/shop-detail.component';
+import { ShopDetailComponent } from './component/customer/shop-detail/shop-detail.component';
 import {HttpClientModule} from "@angular/common/http";
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatTableModule} from "@angular/material/table";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatButtonModule} from "@angular/material/button";
-import {ProductDetailComponent} from './component/customer/product-detail/product-detail.component';
+import { ProductDetailComponent } from './component/customer/product-detail/product-detail.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {StoreListComponent} from './component/customer/store-list/store-list.component';
 import {CreateProductComponent} from './component/seller/create-product/create-product.component';
@@ -21,6 +21,9 @@ import {AngularFireStorageModule} from "@angular/fire/compat/storage";
 import {AngularFireModule} from "@angular/fire/compat";
 import {AngularFireDatabaseModule} from "@angular/fire/compat/database";
 import { SProductListComponent } from './component/seller/s-product-list/s-product-list.component';
+import { AdAccountListComponent } from './component/admin/ad-account-list/ad-account-list.component';
+import { AdStoreListComponent } from './component/admin/ad-store-list/ad-store-list.component';
+import { AdAccountDetailComponent } from './component/admin/ad-account-detail/ad-account-detail.component';
 
 
 @NgModule({
@@ -33,7 +36,10 @@ import { SProductListComponent } from './component/seller/s-product-list/s-produ
     ProductDetailComponent,
     StoreListComponent,
     CreateProductComponent,
-    SProductListComponent
+    SProductListComponent,
+    AdAccountListComponent,
+    AdStoreListComponent,
+    AdAccountDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -52,5 +58,4 @@ import { SProductListComponent } from './component/seller/s-product-list/s-produ
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-}
+export class AppModule { }
