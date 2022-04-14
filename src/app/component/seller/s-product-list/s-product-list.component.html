@@ -10,13 +10,13 @@
 
           <div class="filter-col3 p-r-15 p-b-27">
             <div class="mtext-102 cl2 p-b-15">
-              {{store.name}}
+              {{store?.name}}
             </div>
 
             <ul>
               <li class="p-b-6">
 									<span class="filter-link stext-106 trans-04">
-										{{store.storeOwner?.fullName}}
+										{{store?.storeOwner?.fullName}}
 									</span>
               </li>
 
@@ -146,7 +146,7 @@
         <div class="tab-pane fade show active" id="description" role="tabpanel">
           <div class="how-pos2 p-lr-15-md">
             <p class="stext-102 cl6">
-              {{store.description}}
+              {{store?.description}}
             </p>
           </div>
         </div>
@@ -244,7 +244,7 @@
 
   <div class="bg6 flex-c-m flex-w size-302 m-t-73 p-tb-15">
         <span class="stext-107 cl6 p-lr-25">
-				{{store.categoriesList?.name}}
+				{{store?.categoriesList?.name}}
 			</span>
   </div>
 </section>
@@ -264,24 +264,8 @@
           All Products
         </button>
 
-        <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".women">
-          Women
-        </button>
-
-        <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".men">
-          Men
-        </button>
-
-        <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".bag">
-          Bag
-        </button>
-
-        <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".shoes">
-          Shoes
-        </button>
-
-        <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".watches">
-          Watches
+        <button [routerLink]="['/create-product']" class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".women">
+          Add Product
         </button>
       </div>
 
@@ -528,6 +512,7 @@
               <a class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
                 {{p.store?.name}}
               </a>
+              <button (click)="deleteProduct(p.id)">Delete</button>
             </div>
 
             <div class="block2-txt-child2 flex-r p-t-3">

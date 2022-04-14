@@ -1,28 +1,78 @@
-<h1>Add New Product</h1>
-<form [formGroup]="productForm" (ngSubmit)="submit()">
+<!--<h1>Add New Product</h1>-->
+<!--<form [formGroup]="productForm" (ngSubmit)="submit()">-->
+<!--  <table>-->
+<!--    <tr>-->
+<!--      <td>Name:</td>-->
+<!--      <td><input type="text" formControlName="name"></td>-->
+<!--    </tr>-->
+<!--    <tr>-->
+<!--      <td>Price</td>-->
+<!--      <td><input type="number" formControlName="price"></td>-->
+<!--    </tr>-->
+<!--    <tr>-->
+<!--      <td>Inventory Quantity</td>-->
+<!--      <td><input type="number" formControlName="inventoryQuantity"></td>-->
+<!--    </tr>-->
+<!--    <tr>-->
+<!--      <td>Description</td>-->
+<!--      <td><input type="text" formControlName="description"></td>-->
+<!--    </tr>-->
+<!--    <tr>-->
+<!--        <input-->
+<!--          type="file"-->
+<!--          class="text-nowrap text-truncate"-->
+<!--          (change)="selectFile($event)"-->
+<!--        />-->
+<!--      <div *ngIf="currentFileUpload" class="progress mt-2">-->
+<!--        <div-->
+<!--          class="progress-bar progress-bar-info"-->
+<!--          role="progressbar"-->
+<!--          attr.aria-valuenow="{{ percentage }}"-->
+<!--          aria-valuemin="0"-->
+<!--          aria-valuemax="100"-->
+<!--          [ngStyle]="{ width: percentage + '%' }"-->
+<!--        >-->
+<!--          {{ percentage }}%-->
+<!--        </div>-->
+<!--        <p *ngIf="percentage == 100">{{currentFileUpload.url}}</p>-->
+<!--      </div>-->
+<!--    </tr>-->
+<!--    <tr>-->
+<!--      <td></td>-->
+<!--      <td>-->
+<!--        <button>Create New</button>-->
+<!--      </td>-->
+<!--    </tr>-->
+<!--  </table>-->
+<!--</form>-->
+
+<form class="box" [formGroup]="productForm" (ngSubmit)="submit()">
   <table>
     <tr>
-      <td>Name:</td>
-      <td><input type="text" formControlName="name"></td>
+      <th colspan="2"><h1 id="header">Create New Product</h1></th>
     </tr>
     <tr>
-      <td>Price</td>
-      <td><input type="number" formControlName="price"></td>
+      <th><label for="name" class="form-label">Name:</label></th>
+      <td><input class="form-control" id="name" formControlName="name" type="text"></td>
     </tr>
     <tr>
-      <td>Inventory Quantity</td>
-      <td><input type="number" formControlName="inventoryQuantity"></td>
+      <th><label for="price" class="form-label">Price:</label></th>
+      <td><input class="form-control" id="price" formControlName="price" type="number"></td>
     </tr>
     <tr>
-      <td>Description</td>
-      <td><input type="text" formControlName="description"></td>
+      <th><label for="inventoryQuantity" class="form-label">Inventory Quantity:</label></th>
+      <td><input class="form-control" id="inventoryQuantity" formControlName="inventoryQuantity" type="number"></td>
     </tr>
     <tr>
-        <input
-          type="file"
-          class="text-nowrap text-truncate"
-          (change)="selectFile($event)"
-        />
+      <th><label for="description" class="form-label">Description:</label></th>
+      <td><input class="form-control" id="description" formControlName="description" type="text">
+    </tr>
+    <tr>
+      <input
+        type="file"
+        class="text-nowrap text-truncate"
+        (change)="selectFile($event)"
+      />
       <div *ngIf="currentFileUpload" class="progress mt-2">
         <div
           class="progress-bar progress-bar-info"
@@ -34,13 +84,13 @@
         >
           {{ percentage }}%
         </div>
-        <p *ngIf="percentage == 100">{{currentFileUpload.url}}</p>
       </div>
     </tr>
+
+    <br>
     <tr>
-      <td></td>
-      <td>
-        <button>Create New</button>
+      <td colspan="2" id="center">
+        <button *ngIf="percentage == 100" type="submit" class="btn btn-primary" id="submit">Create</button>
       </td>
     </tr>
   </table>

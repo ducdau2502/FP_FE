@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SellerService } from 'src/app/service/seller.service';
 import {Product} from "../../../model/product";
+import {Store} from "../../../model/store";
 
 @Component({
   selector: 'app-s-product-list',
@@ -9,11 +10,19 @@ import {Product} from "../../../model/product";
 })
 export class SProductListComponent implements OnInit {
   products: Product[] = [];
+  store!: Store;
 
   constructor(private sellerService: SellerService) { }
 
   ngOnInit(): void {
     this.getAllProducts();
+    this.getStoreById();
+  }
+
+  getStoreById() {
+    this.sellerService.getStoreById(3).subscribe(data => {
+      this.store = data;
+    })
   }
 
   getAllProducts() {
@@ -23,9 +32,15 @@ export class SProductListComponent implements OnInit {
   }
 
   deleteProduct(id: any) {
-    this.sellerService.deleteProduct(id).subscribe(() => {
-      alert('Delete Product Successful');
-      this.getAllProducts();
-    })
+    if (confirm('Are you sure you want to delete this product ?')) {
+      this.sellerService.deleteProduct(id).subscribe(() => {
+        alert('Delete product successfully');
+        this.getAllProducts();
+      })
+    }
+  }
+
+  saveId(id: any, name: string) {
+    localStorage.setItem(name, id);
   }
 }

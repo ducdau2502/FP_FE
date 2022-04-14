@@ -8,6 +8,7 @@ import { CreateProductComponent } from './component/seller/create-product/create
 import {AdAccountListComponent} from "./component/admin/ad-account-list/ad-account-list.component";
 import {AdStoreListComponent} from "./component/admin/ad-store-list/ad-store-list.component";
 import {AdAccountDetailComponent} from "./component/admin/ad-account-detail/ad-account-detail.component";
+import { SProductListComponent } from './component/seller/s-product-list/s-product-list.component';
 
 const routes: Routes = [
   //home, guest, customer
@@ -36,7 +37,10 @@ const routes: Routes = [
     path:"create-product",
     component: CreateProductComponent
   },
-
+  {
+    path: "s-product-list",
+    component: SProductListComponent
+  },
   //admin
   {
     path:"ad-home",
