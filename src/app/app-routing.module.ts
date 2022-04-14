@@ -7,6 +7,10 @@ import {StoreListComponent} from "./component/customer/store-list/store-list.com
 import {HomeComponent} from "./component/home/home.component";
 import {LoginComponent} from "./component/login/login.component";
 import {RegisterComponent} from "./component/register/register.component";
+import {CreateProductComponent} from "./component/seller/create-product/create-product.component";
+import {AdAccountListComponent} from "./component/admin/ad-account-list/ad-account-list.component";
+import {AdAccountDetailComponent} from "./component/admin/ad-account-detail/ad-account-detail.component";
+import {AdStoreListComponent} from "./component/admin/ad-store-list/ad-store-list.component";
 
 const routes: Routes = [
   {
@@ -28,6 +32,24 @@ const routes: Routes = [
   {
     path:"",
     component: ProductListComponent
+  },
+  //seller
+  {
+    path:"create-product",
+    component: CreateProductComponent
+  },
+  //admin
+  {
+    path:"ad-home",
+    component: AdAccountListComponent
+  },
+  {
+    path:"ad-store-list",
+    component: AdStoreListComponent
+  },
+  {
+    path:"ad-account-detail",
+    component: AdAccountDetailComponent
   },
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
