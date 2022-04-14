@@ -15,12 +15,8 @@ import {MatButtonModule} from "@angular/material/button";
 import { ProductDetailComponent } from './component/customer/product-detail/product-detail.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { StoreListComponent } from './component/customer/store-list/store-list.component';
-import { LoginComponent } from './component/login/login.component';
-import { RegisterComponent } from './component/register/register.component';
-import { HomeComponent } from './component/home/home.component';
-import { SellerComponent } from './component/seller/seller.component';
-import { AdminComponent } from './component/admin/admin.component';
-import { authInterceptorProviders } from './helpers/auth.interceptor';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,12 +25,7 @@ import { authInterceptorProviders } from './helpers/auth.interceptor';
     FooterComponent,
     ShopDetailComponent,
     ProductDetailComponent,
-    StoreListComponent,
-    LoginComponent,
-    RegisterComponent,
-    HomeComponent,
-    SellerComponent,
-    AdminComponent
+    StoreListComponent
   ],
     imports: [
         BrowserModule,
@@ -47,7 +38,7 @@ import { authInterceptorProviders } from './helpers/auth.interceptor';
         FormsModule,
         ReactiveFormsModule
     ],
-  providers: [authInterceptorProviders],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
