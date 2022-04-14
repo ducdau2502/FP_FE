@@ -20,7 +20,7 @@ import { RegisterComponent } from './component/register/register.component';
 import { HomeComponent } from './component/home/home.component';
 import { SellerComponent } from './component/seller/seller.component';
 import { AdminComponent } from './component/admin/admin.component';
-import { authInterceptorProviders } from './helpers/auth.interceptor';
+import {authInterceptorProviders} from "./component/helpers/auth.interceptor";
 @NgModule({
   declarations: [
     AppComponent,
