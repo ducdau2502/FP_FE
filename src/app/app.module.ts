@@ -18,7 +18,6 @@ import { StoreListComponent } from './component/customer/store-list/store-list.c
 import { LoginComponent } from './component/login/login.component';
 import { RegisterComponent } from './component/register/register.component';
 import { HomeComponent } from './component/home/home.component';
-import { SellerComponent } from './component/seller/seller.component';
 import { AdminComponent } from './component/admin/admin.component';
 import {authInterceptorProviders} from "./component/helpers/auth.interceptor";
 import {CreateProductComponent} from './component/seller/create-product/create-product.component';
@@ -30,6 +29,7 @@ import { SProductListComponent } from './component/seller/s-product-list/s-produ
 import { AdAccountListComponent } from './component/admin/ad-account-list/ad-account-list.component';
 import { AdStoreListComponent } from './component/admin/ad-store-list/ad-store-list.component';
 import { AdAccountDetailComponent } from './component/admin/ad-account-detail/ad-account-detail.component';
+import { EditProductComponent } from './component/seller/edit-product/edit-product.component';
 
 
 @NgModule({
@@ -44,13 +44,13 @@ import { AdAccountDetailComponent } from './component/admin/ad-account-detail/ad
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    SellerComponent,
     AdminComponent,
     CreateProductComponent,
     SProductListComponent,
     AdAccountListComponent,
     AdStoreListComponent,
-    AdAccountDetailComponent
+    AdAccountDetailComponent,
+    EditProductComponent
   ],
 
   providers: [authInterceptorProviders],

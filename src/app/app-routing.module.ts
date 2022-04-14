@@ -12,6 +12,7 @@ import {AdAccountListComponent} from "./component/admin/ad-account-list/ad-accou
 import {AdAccountDetailComponent} from "./component/admin/ad-account-detail/ad-account-detail.component";
 import {AdStoreListComponent} from "./component/admin/ad-store-list/ad-store-list.component";
 import { SProductListComponent } from './component/seller/s-product-list/s-product-list.component';
+import {EditProductComponent} from "./component/seller/edit-product/edit-product.component";
 
 const routes: Routes = [
   {
@@ -42,6 +43,10 @@ const routes: Routes = [
   {
     path: "s-product-list",
     component: SProductListComponent
+  },
+  {
+    path: "update-product/:id",
+    component: EditProductComponent
   },
   //admin
   {
