@@ -4,6 +4,7 @@ import {ProductListComponent} from "./component/customer/product-list/product-li
 import {ShopDetailComponent} from "./component/customer/shop-detail/shop-detail.component";
 import {ProductDetailComponent} from "./component/customer/product-detail/product-detail.component";
 import {StoreListComponent} from "./component/customer/store-list/store-list.component";
+import { CreateProductComponent } from './component/seller/create-product/create-product.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,10 @@ const routes: Routes = [
   {
     path:"",
     component: ProductListComponent
+  },
+  {
+    path:"create-product",
+    component: CreateProductComponent
   }
 ];
 
