@@ -3,6 +3,8 @@ import { SellerService } from 'src/app/service/seller.service';
 import {Product} from "../../../model/product";
 import {Store} from "../../../model/store";
 import {ProductImage} from "../../../model/product-image";
+import {CustomerService} from "../../../service/customer.service";
+import {AccountDetail} from "../../../model/account-detail";
 
 @Component({
   selector: 'app-s-product-list',
@@ -14,17 +16,26 @@ export class SProductListComponent implements OnInit {
   store!: Store;
   productImage!: ProductImage;
 
-  constructor(private sellerService: SellerService) { }
+  user!: AccountDetail;
+
+  idUser= localStorage.getItem("USER_KEY");
+
+  constructor(private sellerService: SellerService,
+              private customerService: CustomerService) { }
 
   ngOnInit(): void {
+    this.getUser();
     this.getAllProducts();
-    this.getStoreById();
   }
 
-  getStoreById() {
-    this.sellerService.getStoreById(3).subscribe(data => {
-      this.store = data;
-    })
+  getUser() {
+    this.customerService.findAccountById(this.idUser).subscribe(data => {
+        this.user = data;
+      this.customerService.findStoreByOwnerId(data.id).subscribe(store => {
+        this.store = store;
+      })
+      }
+    );
   }
 
   getProductImage(id: any) {

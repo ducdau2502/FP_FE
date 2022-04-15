@@ -4,6 +4,7 @@ import {Product} from "../../../model/product";
 import {ProductFeedback} from "../../../model/product-feedback";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AccountDetail} from "../../../model/account-detail";
+import {TokenStorageService} from "../../../service/auth/token-storage.service";
 
 @Component({
   selector: 'app-product-detail',
@@ -11,6 +12,10 @@ import {AccountDetail} from "../../../model/account-detail";
   styleUrls: ['./product-detail.component.css']
 })
 export class ProductDetailComponent implements OnInit {
+
+  idUser= localStorage.getItem("USER_KEY");
+
+  user!: AccountDetail;
 
   idProduct = localStorage.getItem("product_id");
 
@@ -31,6 +36,14 @@ export class ProductDetailComponent implements OnInit {
     this.getFeedbackByIdProduct();
     this.countFb();
     this.getImage();
+    this.getUser();
+  }
+
+  getUser() {
+    this.customerService.findAccountById(this.idUser).subscribe(data => {
+        this.user = data;
+      }
+    );
   }
 
   countFb() {
@@ -44,9 +57,7 @@ export class ProductDetailComponent implements OnInit {
     const form = this.fbForm.value;
     const fb = {
       content: form.content,
-      accountFeedback: {
-        id: 1
-      },
+      accountFeedback: this.user,
       productFeedback: this.product
     }
     this.customerService.createFeedback(fb).subscribe(() => {

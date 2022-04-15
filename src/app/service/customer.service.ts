@@ -7,6 +7,7 @@ import {Store} from "../model/store";
 import {ProductFeedback} from "../model/product-feedback";
 import {StoreCategories} from "../model/storecategories";
 import {ProductImage} from "../model/product-image";
+import {AccountDetail} from "../model/account-detail";
 
 @Injectable({
   providedIn: 'root'
@@ -82,6 +83,14 @@ export class CustomerService {
 
   topProductSale(): Observable<Product[]> {
     return this.http.get<Product[]>(this.API_HOME + '/top-product-sale');
+  }
+
+  findAccountById(id: any): Observable<AccountDetail> {
+    return this.http.get<AccountDetail>(this.API_HOME + `/detail-account/${id}`);
+  }
+
+  findStoreByOwnerId(id: any): Observable<Store> {
+    return this.http.get<Store>(this.API_HOME + `/detail-store/${id}`);
   }
 
 }

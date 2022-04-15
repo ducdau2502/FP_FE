@@ -22,9 +22,6 @@
           <a href="#" class="flex-c-m trans-04 p-lr-25"  [routerLink]="['/ad-home']"  *ngIf="showAdminBoard">
             ADMIN
           </a>
-          <a href="#" class="flex-c-m trans-04 p-lr-25"  [routerLink]="['/ad-home']"  *ngIf="showSellerBoard">
-            SELLER
-          </a>
         </div>
       </div>
     </div>
@@ -61,7 +58,7 @@
             </li>
 
             <li>
-              <a [routerLink]="['/s-product-list']">My Store</a>
+              <a [routerLink]="['/s-product-list' ]" *ngIf="showSellerBoard">My Store</a>
             </li>
           </ul>
         </div>
