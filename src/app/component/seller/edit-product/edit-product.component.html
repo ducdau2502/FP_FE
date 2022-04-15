@@ -1,7 +1,7 @@
-<form class="box" [formGroup]="productForm" (ngSubmit)="submit()">
+<form class="box" [formGroup]="productForm" (ngSubmit)="updateProduct(id)">
   <table>
     <tr>
-      <th colspan="2"><h1 id="header">Create New Product</h1></th>
+      <th colspan="2"><h1 id="header">Update Product</h1></th>
     </tr>
     <tr>
       <th><label for="name" class="form-label">Name:</label></th>
@@ -19,30 +19,11 @@
       <th><label for="description" class="form-label">Description:</label></th>
       <td><input class="form-control" id="description" formControlName="description" type="text">
     </tr>
-    <tr>
-      <input
-        type="file"
-        class="text-nowrap text-truncate"
-        (change)="selectFile($event)"
-      />
-      <div *ngIf="currentFileUpload" class="progress mt-2">
-        <div
-          class="progress-bar progress-bar-info"
-          role="progressbar"
-          attr.aria-valuenow="{{ percentage }}"
-          aria-valuemin="0"
-          aria-valuemax="100"
-          [ngStyle]="{ width: percentage + '%' }"
-        >
-          {{ percentage }}%
-        </div>
-      </div>
-    </tr>
 
     <br>
     <tr>
       <td colspan="2" id="center">
-        <button *ngIf="percentage == 100" type="submit" class="btn btn-primary" id="submit">Create</button>
+        <button type="submit" class="btn btn-primary" id="submit">Update</button>
       </td>
     </tr>
   </table>

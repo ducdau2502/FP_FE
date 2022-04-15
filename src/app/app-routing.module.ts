@@ -10,6 +10,8 @@ import {CreateProductComponent} from "./component/seller/create-product/create-p
 import {AdAccountListComponent} from "./component/admin/ad-account-list/ad-account-list.component";
 import {AdAccountDetailComponent} from "./component/admin/ad-account-detail/ad-account-detail.component";
 import {AdStoreListComponent} from "./component/admin/ad-store-list/ad-store-list.component";
+import { SProductListComponent } from './component/seller/s-product-list/s-product-list.component';
+import {EditProductComponent} from "./component/seller/edit-product/edit-product.component";
 
 const routes: Routes = [
   {
@@ -36,6 +38,14 @@ const routes: Routes = [
   {
     path:"create-product",
     component: CreateProductComponent
+  },
+  {
+    path: "s-product-list",
+    component: SProductListComponent
+  },
+  {
+    path: "update-product/:id",
+    component: EditProductComponent
   },
   //admin
   {

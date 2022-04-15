@@ -32,12 +32,6 @@ export class CreateProductComponent implements OnInit {
 
   selectFile(event: any): void {
     this.selectedFiles = event.target.files;
-  }
-
-  submit(): void {
-    const product = this.productForm.value;
-    const image = this.image;
-
     if (this.selectedFiles) {
       const file: File | null = this.selectedFiles.item(0);
       this.selectedFiles = undefined;
@@ -51,7 +45,20 @@ export class CreateProductComponent implements OnInit {
         });
       }
     }
-    this.sellerService.createProduct(3, product).subscribe(() => {
+  }
+
+  submit(): void {
+    const product = this.productForm.value;
+    this.sellerService.createProduct(3, product).subscribe( (data) => {
+      this.image = {
+        url: this.currentFileUpload?.url,
+        product: data
+      }
+      this.sellerService.createImage(this.image).subscribe();
+      alert('Create Product Successful');
+      this.productForm.reset();
     });
+
+
   }
 }
