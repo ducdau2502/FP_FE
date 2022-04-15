@@ -35,6 +35,7 @@
       <td>
         <button class="btn btn-danger" *ngIf="s.storeOwner?.status == 'normal'" (click)="blockStore(s.storeOwner?.id)"><i class="fa-solid fa-ban" style="margin-right: 3px"></i> Block</button>
         <button class="btn btn-primary" *ngIf="s.storeOwner?.status != 'normal'" (click)="blockStore(s.storeOwner?.id)"><i class="fa-regular fa-circle-check" style="margin-right: 3px"></i> UnBlock</button>
+      </td><td>
       </td>
     </tr>
     </tbody>

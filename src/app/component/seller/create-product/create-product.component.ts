@@ -55,7 +55,8 @@ export class CreateProductComponent implements OnInit {
         product: data
       }
       this.sellerService.createImage(this.image).subscribe();
-      console.log(this.image.url);
+      alert('Create Product Successful');
+      this.productForm.reset();
     });
 
 

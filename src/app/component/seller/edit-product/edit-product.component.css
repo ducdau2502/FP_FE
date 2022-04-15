@@ -1,0 +1,12 @@
+.table-hover {
+  width: 800px;
+  text-align: center;
+}
+
+#detail, #center, #center1, h1 {
+  text-align: center;
+}
+
+table {
+  margin: auto;
+}

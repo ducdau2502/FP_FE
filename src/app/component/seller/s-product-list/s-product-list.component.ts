@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SellerService } from 'src/app/service/seller.service';
 import {Product} from "../../../model/product";
 import {Store} from "../../../model/store";
+import {ProductImage} from "../../../model/product-image";
 
 @Component({
   selector: 'app-s-product-list',
@@ -11,6 +12,7 @@ import {Store} from "../../../model/store";
 export class SProductListComponent implements OnInit {
   products: Product[] = [];
   store!: Store;
+  productImage!: ProductImage;
 
   constructor(private sellerService: SellerService) { }
 
@@ -22,6 +24,12 @@ export class SProductListComponent implements OnInit {
   getStoreById() {
     this.sellerService.getStoreById(3).subscribe(data => {
       this.store = data;
+    })
+  }
+
+  getProductImage(id: any) {
+    this.sellerService.getImageByProductId(id).subscribe(data => {
+      this.productImage = data;
     })
   }
 

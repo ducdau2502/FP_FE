@@ -490,7 +490,7 @@
         <!-- Block2 -->
         <div class="block2">
           <div class="block2-pic hov-img0">
-            <img src="assets/images/product-01.jpg" alt="IMG-PRODUCT">
+            <img src="https://firebasestorage.googleapis.com/v0/b/upload-file-koder.appspot.com/o/uploads-shopBi%2F1649929780054headphone-Sony.jpg?alt=media&token=3f66fe1e-466e-4f23-bd55-73badc0ea162" alt="IMG-PRODUCT">
 
             <a href="#"
                class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
@@ -512,6 +512,7 @@
               <a class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
                 {{p.store?.name}}
               </a>
+              <a [routerLink]="['/update-product/', p.id]">Edit</a>
               <button (click)="deleteProduct(p.id)">Delete</button>
             </div>
 

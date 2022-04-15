@@ -38,4 +38,16 @@ export class SellerService {
   getStoreById(id: any): Observable<Store> {
     return this.http.get<Store>(this.API_HOME + `/find-store/${id}`);
   }
+
+  getImageByProductId(id: any): Observable<ProductImage> {
+    return this.http.get<ProductImage>(this.API_SELLER + `get-image/${id}`);
+  }
+
+  updateProduct(id: any, product: Product): Observable<Product> {
+    return this.http.put<Product>(this.API_SELLER + `${id}`, product);
+  }
+
+  getProductById(id: number): Observable<Product> {
+    return this.http.get<Product>(this.API_SELLER + 'product/' + id);
+  }
 }
