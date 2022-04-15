@@ -6,6 +6,7 @@ import {Product} from "../model/product";
 import {Store} from "../model/store";
 import {ProductFeedback} from "../model/product-feedback";
 import {StoreCategories} from "../model/storecategories";
+import {ProductImage} from "../model/product-image";
 
 @Injectable({
   providedIn: 'root'
@@ -59,6 +60,10 @@ export class CustomerService {
 
   getProductByPrice(lower: number, upper: number): Observable<Product[]> {
     return this.http.get<Product[]>(this.API_HOME + `/search-products/${lower}/${upper}`);
+  }
+
+  getProductImageById(id: any): Observable<ProductImage> {
+    return this.http.get<ProductImage>(this.API_HOME + `/get-image/${id}`);
   }
 
   searchProductByNameContaining(mess: string): Observable<Product[]> {

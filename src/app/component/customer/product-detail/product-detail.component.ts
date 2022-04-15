@@ -18,6 +18,7 @@ export class ProductDetailComponent implements OnInit {
   feedback!: ProductFeedback;
   feedbacks!: ProductFeedback[];
   countFeedback!: string;
+  image?: string;
 
   fbForm = new FormGroup({
     content: new FormControl('', [Validators.required]),
@@ -29,12 +30,12 @@ export class ProductDetailComponent implements OnInit {
     this.getProductById();
     this.getFeedbackByIdProduct();
     this.countFb();
+    this.getImage();
   }
 
   countFb() {
     this.customerService.countFeedback(this.idProduct).subscribe(data => {
         this.countFeedback = data;
-      console.log(this.countFeedback)
       }
     );
   }
@@ -60,6 +61,13 @@ export class ProductDetailComponent implements OnInit {
     this.customerService.getProductById(this.idProduct).subscribe(data => {
       this.product = data;
     })
+  }
+
+  getImage() {
+    this.customerService.getProductImageById(this.idProduct).subscribe( (data) => {
+      this.image = data.url;
+    });
+    return this.image;
   }
 
   getFeedbackByIdProduct() {
