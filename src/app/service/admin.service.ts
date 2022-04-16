@@ -8,7 +8,7 @@ import {Store} from "../model/store";
 @Injectable({
   providedIn: 'root'
 })
-export class AdminServiceService {
+export class AdminService {
 
   private API_ADMIN = environment.API_LOCAL + 'admin/dashboard';
 

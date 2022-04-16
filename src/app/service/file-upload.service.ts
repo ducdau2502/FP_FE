@@ -23,7 +23,6 @@ export class FileUploadService {
       finalize(() => {
         storageRef.getDownloadURL().subscribe(downloadURL => {
           fileUpload.url = downloadURL
-          // localStorage.setItem("imageUrl", downloadURL)
           fileUpload.name = fileUpload.file.name;
           this.saveFileData(fileUpload);
         });

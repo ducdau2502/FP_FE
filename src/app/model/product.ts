@@ -8,4 +8,5 @@ export interface Product {
   soldQuantity?: number;
   description?: string;
   store?: Store;
+  coverImage?: string;
 }

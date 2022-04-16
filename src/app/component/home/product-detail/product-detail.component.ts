@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {CustomerService} from "../../../service/customer.service";
+import {Component, OnInit} from '@angular/core';
+import {HomeService} from "../../../service/home.service";
 import {Product} from "../../../model/product";
 import {ProductFeedback} from "../../../model/product-feedback";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
@@ -13,9 +13,13 @@ import {TokenStorageService} from "../../../service/auth/token-storage.service";
 })
 export class ProductDetailComponent implements OnInit {
 
-  idUser= localStorage.getItem("USER_KEY");
+  idUser = localStorage.getItem("USER_KEY");
 
   user!: AccountDetail;
+
+  private roles: string[] = [];
+  isLoggedIn = false;
+  showCustomerBoard = false;
 
   idProduct = localStorage.getItem("product_id");
 
@@ -24,14 +28,25 @@ export class ProductDetailComponent implements OnInit {
   feedbacks!: ProductFeedback[];
   countFeedback!: string;
   image?: string;
+  username?: string;
 
   fbForm = new FormGroup({
     content: new FormControl('', [Validators.required]),
   })
 
-  constructor(private customerService: CustomerService) { }
+  constructor(private customerService: HomeService,
+              private tokenStorageService: TokenStorageService) {
+  }
 
   ngOnInit() {
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
+    if (this.isLoggedIn) {
+      const user = this.tokenStorageService.getUser();
+      this.roles = user.roles;
+      this.showCustomerBoard = this.roles.includes('ROLE_CUSTOMER');
+      this.username = user.username;
+    }
+
     this.getProductById();
     this.getFeedbackByIdProduct();
     this.countFb();
@@ -75,7 +90,7 @@ export class ProductDetailComponent implements OnInit {
   }
 
   getImage() {
-    this.customerService.getProductImageById(this.idProduct).subscribe( (data) => {
+    this.customerService.getProductImageById(this.idProduct).subscribe((data) => {
       this.image = data.url;
     });
     return this.image;

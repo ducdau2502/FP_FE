@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {CustomerService} from "../../../service/customer.service";
+import {HomeService} from "../../../service/home.service";
 import {Store} from "../../../model/store";
 import {StoreCategories} from "../../../model/storecategories";
 
@@ -14,7 +14,7 @@ export class StoreListComponent implements OnInit {
   categories!: StoreCategories[];
   message: string = '';
 
-  constructor(private customerService: CustomerService) { }
+  constructor(private customerService: HomeService) { }
 
   ngOnInit() {
     this.getAllStore();

@@ -3,7 +3,7 @@ import { SellerService } from 'src/app/service/seller.service';
 import {Product} from "../../../model/product";
 import {Store} from "../../../model/store";
 import {ProductImage} from "../../../model/product-image";
-import {CustomerService} from "../../../service/customer.service";
+import {HomeService} from "../../../service/home.service";
 import {AccountDetail} from "../../../model/account-detail";
 
 @Component({
@@ -21,7 +21,7 @@ export class SProductListComponent implements OnInit {
   idUser= localStorage.getItem("USER_KEY");
 
   constructor(private sellerService: SellerService,
-              private customerService: CustomerService) { }
+              private customerService: HomeService) { }
 
   ngOnInit(): void {
     this.getUser();

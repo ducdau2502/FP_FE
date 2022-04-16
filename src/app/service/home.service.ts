@@ -12,7 +12,7 @@ import {AccountDetail} from "../model/account-detail";
 @Injectable({
   providedIn: 'root'
 })
-export class CustomerService {
+export class HomeService {
 
   private API_HOME = environment.API_LOCAL + 'home';
 

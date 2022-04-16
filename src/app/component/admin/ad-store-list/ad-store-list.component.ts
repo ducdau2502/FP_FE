@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Store} from "../../../model/store";
-import {AdminServiceService} from "../../../service/admin-service.service";
+import {AdminService} from "../../../service/admin.service";
 
 @Component({
   selector: 'app-ad-store-list',
@@ -12,7 +12,7 @@ export class AdStoreListComponent implements OnInit {
   stores!: Store[];
   message: string = '';
 
-  constructor(private adminService: AdminServiceService) { }
+  constructor(private adminService: AdminService) { }
 
   ngOnInit() {
     this.getAllStore();

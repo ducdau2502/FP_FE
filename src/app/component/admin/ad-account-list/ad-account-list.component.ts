@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {AdminServiceService} from "../../../service/admin-service.service";
+import {AdminService} from "../../../service/admin.service";
 import {AccountDetail} from "../../../model/account-detail";
 
 @Component({
@@ -11,7 +11,7 @@ export class AdAccountListComponent implements OnInit {
 
   accounts!: AccountDetail[];
 
-  constructor(private adminService: AdminServiceService) { }
+  constructor(private adminService: AdminService) { }
 
   ngOnInit() {
     this.getAllAccount()
