@@ -30,8 +30,8 @@ export class HeaderComponent implements OnInit {
       this.showCustomerBoard = this.roles.includes('ROLE_CUSTOMER');
       this.username = user.username;
       this.id  = user.id;
+      this.getAccountDetail();
     }
-    this.getAccountDetail();
   }
   logout(): void {
     this.tokenStorageService.signOut();
