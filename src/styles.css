@@ -3,3 +3,8 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 @import "~bootstrap/dist/css/bootstrap.css";
+
+.block2-pic {
+  width: 250px;
+  height: 250px;
+}

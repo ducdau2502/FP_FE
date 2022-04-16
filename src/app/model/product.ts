@@ -7,5 +7,6 @@ export interface Product {
   inventoryQuantity?: number;
   soldQuantity?: number;
   description?: string;
+  coverImage?: string;
   store?: Store;
 }

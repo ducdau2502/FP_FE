@@ -29,6 +29,7 @@ import { AdAccountListComponent } from './component/admin/ad-account-list/ad-acc
 import { AdStoreListComponent } from './component/admin/ad-store-list/ad-store-list.component';
 import { AdAccountDetailComponent } from './component/admin/ad-account-detail/ad-account-detail.component';
 import { EditProductComponent } from './component/seller/edit-product/edit-product.component';
+import {NgToastModule} from "ng-angular-popup";
 
 
 @NgModule({
@@ -64,7 +65,8 @@ import { EditProductComponent } from './component/seller/edit-product/edit-produ
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireStorageModule,
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    NgToastModule
   ],
   bootstrap: [AppComponent]
 })
