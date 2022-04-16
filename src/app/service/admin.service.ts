@@ -14,8 +14,8 @@ export class AdminService {
 
   constructor(private http: HttpClient) { }
 
-  getAllAccount(): Observable<AccountDetail[]> {
-    return this.http.get<AccountDetail[]>(this.API_ADMIN + `/list-account`);
+  getAllAccount(params: any): Observable<AccountDetail[]> {
+    return this.http.get<AccountDetail[]>(this.API_ADMIN + `/list-account`, {params});
   }
 
   getAllStore(): Observable<Store[]> {
