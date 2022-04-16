@@ -30,35 +30,33 @@ export class CreateProductComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  selectFile(event: any): void {
-    this.selectedFiles = event.target.files;
-    if (this.selectedFiles) {
-      const file: File | null = this.selectedFiles.item(0);
-      this.selectedFiles = undefined;
-      if (file) {
-        this.currentFileUpload = new FileUpload(file);
-        this.uploadService.pushFileToStorage(this.currentFileUpload).subscribe(percentage => {
-          this.percentage = Math.round(percentage ? percentage : 0);
-
-        }, error => {console.log(error);
-
-        });
-      }
-    }
-  }
-
-  submit(): void {
-    const product = this.productForm.value;
-    this.sellerService.createProduct(3, product).subscribe( (data) => {
-      this.image = {
-        url: this.currentFileUpload?.url,
-        product: data
-      }
-      this.sellerService.createImage(this.image).subscribe();
-      alert('Create Product Successful');
-      this.productForm.reset();
-    });
-
-
-  }
+  // selectFile(event: any): void {
+  //   this.selectedFiles = event.target.files;
+  //   if (this.selectedFiles) {
+  //     const file: File | null = this.selectedFiles.item(0);
+  //     this.selectedFiles = undefined;
+  //     if (file) {
+  //       this.currentFileUpload = new FileUpload(file);
+  //       this.uploadService.pushFileToStorage(this.currentFileUpload).subscribe(percentage => {
+  //         this.percentage = Math.round(percentage ? percentage : 0);
+  //
+  //       }, error => {console.log(error);
+  //
+  //       });
+  //     }
+  //   }
+  // }
+  //
+  // submit(): void {
+  //   const product = this.productForm.value;
+  //   this.sellerService.createProduct(3, product).subscribe( (data) => {
+  //     this.image = {
+  //       url: this.currentFileUpload?.url,
+  //       product: data
+  //     }
+  //     this.sellerService.createImage(this.image).subscribe();
+  //     alert('Create Product Successful');
+  //     this.productForm.reset();
+  //   });
+  // }
 }
