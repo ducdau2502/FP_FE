@@ -3,8 +3,9 @@ import { SellerService } from 'src/app/service/seller.service';
 import {Product} from "../../../model/product";
 import {Store} from "../../../model/store";
 import {ProductImage} from "../../../model/product-image";
-import {CustomerService} from "../../../service/customer.service";
+import {HomeService} from "../../../service/home.service";
 import {AccountDetail} from "../../../model/account-detail";
+import {TokenStorageService} from "../../../service/auth/token-storage.service";
 import {FileUpload} from "../../../model/file-upload.model";
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {FileUploadService} from "../../../service/file-upload.service";
@@ -28,10 +29,12 @@ export class SProductListComponent implements OnInit {
 
   productForm!: FormGroup;
 
-  idUser= localStorage.getItem("USER_KEY");
+  // idUser= localStorage.getItem("USER_KEY");
+  idUser= this.tokenService.getUser().id;
 
   constructor(private sellerService: SellerService,
-              private customerService: CustomerService,
+              private customerService: HomeService,
+              private tokenService: TokenStorageService,
               private uploadService : FileUploadService,
               private toast: NgToastService,
               private fb: FormBuilder) { }

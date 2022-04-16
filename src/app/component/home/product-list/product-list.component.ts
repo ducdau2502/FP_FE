@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Product} from "../../../model/product";
-import {CustomerService} from "../../../service/customer.service";
+import {HomeService} from "../../../service/home.service";
+import {JwtResponse} from "../../../model/response/JwtResponse";
+import {TokenStorageService} from "../../../service/auth/token-storage.service";
 
 @Component({
   selector: 'app-product-list',
@@ -12,11 +14,15 @@ export class ProductListComponent implements OnInit {
   products!: Product[];
   message: string = '';
 
-  constructor(private customerService: CustomerService) {
+  user?: JwtResponse;
+
+  constructor(private customerService: HomeService,
+              private tokenService: TokenStorageService) {
   }
 
   ngOnInit() {
     this.getAllProduct();
+    this.user = this.tokenService.getUser();
   }
 
   search() {

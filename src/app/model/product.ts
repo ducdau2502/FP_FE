@@ -9,4 +9,5 @@ export interface Product {
   description?: string;
   coverImage?: string;
   store?: Store;
+  coverImage?: string;
 }

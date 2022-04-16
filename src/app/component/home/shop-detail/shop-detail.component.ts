@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Store} from "../../../model/store";
-import {CustomerService} from "../../../service/customer.service";
+import {HomeService} from "../../../service/home.service";
 import {Product} from "../../../model/product";
 
 @Component({
@@ -14,7 +14,7 @@ export class ShopDetailComponent implements OnInit {
   store!: Store;
   products!: Product[];
 
-  constructor(private customerService: CustomerService) { }
+  constructor(private customerService: HomeService) { }
 
   ngOnInit() {
     this.getStoreById()

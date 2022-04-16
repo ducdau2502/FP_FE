@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {ProductListComponent} from "./component/customer/product-list/product-list.component";
-import {ShopDetailComponent} from "./component/customer/shop-detail/shop-detail.component";
-import {ProductDetailComponent} from "./component/customer/product-detail/product-detail.component";
-import {StoreListComponent} from "./component/customer/store-list/store-list.component";
+import {ProductListComponent} from "./component/home/product-list/product-list.component";
+import {ShopDetailComponent} from "./component/home/shop-detail/shop-detail.component";
+import {ProductDetailComponent} from "./component/home/product-detail/product-detail.component";
+import {StoreListComponent} from "./component/home/store-list/store-list.component";
 import {LoginComponent} from "./component/login/login.component";
 import {RegisterComponent} from "./component/register/register.component";
 import {CreateProductComponent} from "./component/seller/create-product/create-product.component";

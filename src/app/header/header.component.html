@@ -10,17 +10,23 @@
         </div>
 
         <div class="right-top-bar flex-w h-full">
-          <a href="#" class="flex-c-m trans-04 p-lr-25" [routerLink]="'register'">
+          <a class="flex-c-m trans-04 p-lr-25" style="color: #cccccc"  [routerLink]="['/ad-home']"  *ngIf="showAdminBoard">
+            Admin
+          </a>
+          <a class="flex-c-m trans-04 p-lr-25" style="color: #cccccc" [routerLink]="['/s-product-list' ]" *ngIf="showSellerBoard">
+            My Store
+          </a>
+          <a class="flex-c-m trans-04 p-lr-25" style="color: #cccccc" *ngIf="isLoggedIn">
+            {{user?.fullName}}
+          </a>
+          <a class="flex-c-m trans-04 p-lr-25" style="color: #cccccc" [routerLink]="'register'" *ngIf="!isLoggedIn">
             Sign up
           </a>
-          <a href="#" class="flex-c-m trans-04 p-lr-25"  [routerLink]="'login'">
+          <a class="flex-c-m trans-04 p-lr-25" style="color: #cccccc" [routerLink]="'login'" *ngIf="!isLoggedIn">
             Sign in
           </a>
-          <a href="#" class="flex-c-m trans-04 p-lr-25"  [routerLink]="'login'" (click)="logout()">
-            LogOut
-          </a>
-          <a href="#" class="flex-c-m trans-04 p-lr-25"  [routerLink]="['/ad-home']"  *ngIf="showAdminBoard">
-            ADMIN
+          <a class="flex-c-m trans-04 p-lr-25" style="color: #cccccc" [routerLink]="'login'" (click)="logout()" *ngIf="isLoggedIn">
+            Log out
           </a>
         </div>
       </div>
@@ -55,10 +61,6 @@
 
             <li>
               <a href="contact.html">Contact</a>
-            </li>
-
-            <li>
-              <a [routerLink]="['/s-product-list' ]" *ngIf="showSellerBoard">My Store</a>
             </li>
           </ul>
         </div>
