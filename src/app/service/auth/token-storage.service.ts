@@ -8,7 +8,6 @@ export class TokenStorageService {
   constructor() { }
   signOut(): void {
     window.sessionStorage.clear();
-    window.localStorage.setItem("USER_KEY", "");
   }
   public saveToken(token: string): void {
     window.sessionStorage.removeItem(TOKEN_KEY);
@@ -20,7 +19,6 @@ export class TokenStorageService {
   public saveUser(user: any): void {
     window.sessionStorage.removeItem(USER_KEY);
     window.sessionStorage.setItem(USER_KEY, JSON.stringify(user));
-    window.localStorage.setItem("USER_KEY", user.id);
   }
   public getUser(): any {
     const user = window.sessionStorage.getItem(USER_KEY);

@@ -5,6 +5,7 @@ import {Store} from "../../../model/store";
 import {ProductImage} from "../../../model/product-image";
 import {HomeService} from "../../../service/home.service";
 import {AccountDetail} from "../../../model/account-detail";
+import {TokenStorageService} from "../../../service/auth/token-storage.service";
 
 @Component({
   selector: 'app-s-product-list',
@@ -18,10 +19,11 @@ export class SProductListComponent implements OnInit {
 
   user!: AccountDetail;
 
-  idUser= localStorage.getItem("USER_KEY");
+  idUser= this.tokenService.getUser().id;
 
   constructor(private sellerService: SellerService,
-              private customerService: HomeService) { }
+              private customerService: HomeService,
+              private tokenService: TokenStorageService) { }
 
   ngOnInit(): void {
     this.getUser();

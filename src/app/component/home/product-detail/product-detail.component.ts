@@ -5,6 +5,7 @@ import {ProductFeedback} from "../../../model/product-feedback";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AccountDetail} from "../../../model/account-detail";
 import {TokenStorageService} from "../../../service/auth/token-storage.service";
+import {JwtResponse} from "../../../model/response/JwtResponse";
 
 @Component({
   selector: 'app-product-detail',
@@ -13,9 +14,7 @@ import {TokenStorageService} from "../../../service/auth/token-storage.service";
 })
 export class ProductDetailComponent implements OnInit {
 
-  idUser = localStorage.getItem("USER_KEY");
-
-  user!: AccountDetail;
+  id = this.tokenStorageService.getUser().id;
 
   private roles: string[] = [];
   isLoggedIn = false;
@@ -51,15 +50,8 @@ export class ProductDetailComponent implements OnInit {
     this.getFeedbackByIdProduct();
     this.countFb();
     this.getImage();
-    this.getUser();
   }
 
-  getUser() {
-    this.customerService.findAccountById(this.idUser).subscribe(data => {
-        this.user = data;
-      }
-    );
-  }
 
   countFb() {
     this.customerService.countFeedback(this.idProduct).subscribe(data => {
@@ -72,7 +64,9 @@ export class ProductDetailComponent implements OnInit {
     const form = this.fbForm.value;
     const fb = {
       content: form.content,
-      accountFeedback: this.user,
+      accountFeedback: {
+        id: this.id
+      },
       productFeedback: this.product
     }
     this.customerService.createFeedback(fb).subscribe(() => {
