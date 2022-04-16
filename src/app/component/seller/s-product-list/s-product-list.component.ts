@@ -10,6 +10,7 @@ import {FileUpload} from "../../../model/file-upload.model";
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {FileUploadService} from "../../../service/file-upload.service";
 import {NgToastService} from "ng-angular-popup";
+import {StoreCategories} from "../../../model/store-categories";
 
 @Component({
   selector: 'app-s-product-list',
@@ -18,9 +19,11 @@ import {NgToastService} from "ng-angular-popup";
 })
 export class SProductListComponent implements OnInit {
   products: Product[] = [];
+  productDelete!: Product;
   store!: Store;
   productImage!: ProductImage;
-
+  message: string = '';
+  categories!: StoreCategories[];
   user!: AccountDetail;
 
   selectedFiles?: FileList;
@@ -28,6 +31,10 @@ export class SProductListComponent implements OnInit {
   percentage = 0;
 
   productForm!: FormGroup;
+
+  categoryForm = new FormGroup({
+    name: new FormControl("")
+  })
 
   idUser= this.tokenService.getUser().id;
 
@@ -48,9 +55,9 @@ export class SProductListComponent implements OnInit {
       description: [''],
       coverImage: ['']
     });
-    this.getAllProducts();
+
     if (!!this.tokenStorageService.getToken()) {
-      this.getUser();
+        this.getUser()
     }
   }
 
@@ -59,6 +66,8 @@ export class SProductListComponent implements OnInit {
         this.user = data;
       this.customerService.findStoreByOwnerId(data.id).subscribe(store => {
         this.store = store;
+        this.getAllProducts();
+        this.getAllCategories();
       })
       }
     );
@@ -71,18 +80,22 @@ export class SProductListComponent implements OnInit {
   }
 
   getAllProducts() {
-    this.sellerService.findAllProduct(3).subscribe(products => {
+    this.sellerService.findAllProduct(this.store.id).subscribe(products => {
       this.products = products;
     })
   }
 
+  getProductById(id: any) {
+    this.customerService.getProductById(id).subscribe(product => {
+      this.productDelete = product;
+    })
+  }
+
   deleteProduct(id: any) {
-    if (confirm('Are you sure you want to delete this product ?')) {
       this.sellerService.deleteProduct(id).subscribe(() => {
         this.toast.success({detail:"Successful Message", summary: "Delete Product Successful", duration: 5000})
         this.getAllProducts();
       })
-    }
   }
 
   saveId(id: any, name: string) {
@@ -116,9 +129,8 @@ export class SProductListComponent implements OnInit {
       coverImage: this.currentFileUpload?.url
     };
 
-    this.sellerService.createProduct(3, product).subscribe( () => {
-      // alert('Create Product Successful');
-      if (product.id == null) {
+    this.sellerService.createProduct(this.store.id, product).subscribe( () => {
+      if (product.id == '') {
         this.toast.success({detail:"Successful Message", summary: "Create Product Successful", duration: 5000})
       } else {
         this.toast.success({detail:"Successful Message", summary: "Update Product Successful", duration: 5000})
@@ -135,6 +147,38 @@ export class SProductListComponent implements OnInit {
     });
     // @ts-ignore
     document.getElementById('exampleModalLabel').innerText = 'Update Product';
+  }
+
+  search() {
+    if (this.message == "") {
+      this.getAllProducts();
+    } else {
+      this.customerService.searchProductByNameContaining(this.message).subscribe(data => {
+        this.products = data;
+      })
+    }
+  }
+
+  getAllCategories() {
+    this.customerService.getAllCategories().subscribe(data => {
+      this.categories = data;
+    })
+  }
+
+  createCategory() {
+    const category = {
+      name: this.categoryForm.value.name
+    }
+    this.sellerService.createCategory(category).subscribe(() => {
+      this.getAllCategories();
+      this.categoryForm.reset();
+    })
+  }
+
+  saveCategory(id_category: any) {
+    this.sellerService.saveCategory(this.store.id, id_category).subscribe(() => {
+      this.getUser();
+    })
   }
 
 }

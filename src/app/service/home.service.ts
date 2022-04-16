@@ -5,7 +5,7 @@ import {Observable} from "rxjs";
 import {Product} from "../model/product";
 import {Store} from "../model/store";
 import {ProductFeedback} from "../model/product-feedback";
-import {StoreCategories} from "../model/storecategories";
+import {StoreCategories} from "../model/store-categories";
 import {ProductImage} from "../model/product-image";
 import {AccountDetail} from "../model/account-detail";
 

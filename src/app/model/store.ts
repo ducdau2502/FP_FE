@@ -1,5 +1,5 @@
 import {AccountDetail} from "./account-detail";
-import {StoreCategories} from "./storecategories";
+import {StoreCategories} from "./store-categories";
 
 export interface Store {
   id?: number;
