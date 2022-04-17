@@ -6,6 +6,8 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AccountDetail} from "../../../model/account-detail";
 import {TokenStorageService} from "../../../service/auth/token-storage.service";
 import {JwtResponse} from "../../../model/response/JwtResponse";
+import {CustomerService} from "../../../service/customer.service";
+import {NgToastService} from "ng-angular-popup";
 
 @Component({
   selector: 'app-product-detail',
@@ -32,7 +34,9 @@ export class ProductDetailComponent implements OnInit {
     content: new FormControl('', [Validators.required]),
   })
 
-  constructor(private customerService: HomeService,
+  constructor(private homeService: HomeService,
+              private customerService: CustomerService,
+              private toast: NgToastService,
               private tokenStorageService: TokenStorageService) {
   }
 
@@ -54,7 +58,7 @@ export class ProductDetailComponent implements OnInit {
 
 
   countFb() {
-    this.customerService.countFeedback(this.idProduct).subscribe(data => {
+    this.homeService.countFeedback(this.idProduct).subscribe(data => {
         this.countFeedback = data;
       }
     );
@@ -69,7 +73,7 @@ export class ProductDetailComponent implements OnInit {
       },
       productFeedback: this.product
     }
-    this.customerService.createFeedback(fb).subscribe(() => {
+    this.homeService.createFeedback(fb).subscribe(() => {
         this.getFeedbackByIdProduct();
         this.countFb();
         this.fbForm.reset();
@@ -78,22 +82,28 @@ export class ProductDetailComponent implements OnInit {
   }
 
   getProductById() {
-    this.customerService.getProductById(this.idProduct).subscribe(data => {
+    this.homeService.getProductById(this.idProduct).subscribe(data => {
       this.product = data;
     })
   }
 
   getImage() {
-    this.customerService.getProductImageById(this.idProduct).subscribe((data) => {
+    this.homeService.getProductImageById(this.idProduct).subscribe((data) => {
       this.image = data.url;
     });
     return this.image;
   }
 
   getFeedbackByIdProduct() {
-    this.customerService.getFeedbackByIdProduct(this.idProduct).subscribe(data => {
+    this.homeService.getFeedbackByIdProduct(this.idProduct).subscribe(data => {
       this.feedbacks = data;
     })
   }
 
+  addCart() {
+    this.customerService.addCart(this.id, this.idProduct).subscribe(() => {
+      this.toast.success({detail:"Successful Message", summary: "Add Product To Cart Successful", duration: 5000})
+    })
+  }
 }
+

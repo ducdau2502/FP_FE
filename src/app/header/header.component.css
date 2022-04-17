@@ -1,0 +1,7 @@
+#exampleModal-cart {
+  position: fixed;
+  top: 70px;
+  left: 325px;
+  display: none;
+  z-index: 1000005;
+}
