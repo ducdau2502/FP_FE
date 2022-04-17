@@ -29,7 +29,6 @@ export class SProductListComponent implements OnInit {
 
   productForm!: FormGroup;
 
-  // idUser= localStorage.getItem("USER_KEY");
   idUser= this.tokenService.getUser().id;
 
   constructor(private sellerService: SellerService,
@@ -37,7 +36,8 @@ export class SProductListComponent implements OnInit {
               private tokenService: TokenStorageService,
               private uploadService : FileUploadService,
               private toast: NgToastService,
-              private fb: FormBuilder) { }
+              private fb: FormBuilder,
+              private tokenStorageService: TokenStorageService) { }
 
   ngOnInit(): void {
     this.productForm = this.fb.group({
@@ -48,8 +48,10 @@ export class SProductListComponent implements OnInit {
       description: [''],
       coverImage: ['']
     });
-    this.getUser();
     this.getAllProducts();
+    if (!!this.tokenStorageService.getToken()) {
+      this.getUser();
+    }
   }
 
   getUser() {

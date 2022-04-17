@@ -14,8 +14,7 @@ import {JwtResponse} from "../../../model/response/JwtResponse";
 })
 export class ProductDetailComponent implements OnInit {
 
-  id = this.tokenStorageService.getUser().id;
-
+  id?: number;
   private roles: string[] = [];
   isLoggedIn = false;
   showCustomerBoard = false;
@@ -44,6 +43,7 @@ export class ProductDetailComponent implements OnInit {
       this.roles = user.roles;
       this.showCustomerBoard = this.roles.includes('ROLE_CUSTOMER');
       this.username = user.username;
+      this.id = this.tokenStorageService.getUser().id;
     }
 
     this.getProductById();

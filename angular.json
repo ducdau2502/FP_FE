@@ -35,7 +35,21 @@
               "src/styles.css"
 
             ],
-            "scripts": []
+            "scripts": ["./src/assets/vendor/jquery/jquery-3.2.1.min.js",
+              "./src/assets/vendor/animsition/js/animsition.min.js",
+              "./src/assets/vendor/bootstrap/js/popper.min.js",
+              "./src/assets/vendor/bootstrap/js/bootstrap.min.js",
+              "./src/assets/vendor/select2/select2.min.js",
+              "./src/assets/vendor/daterangepicker/moment.min.js",
+              "./src/assets/vendor/daterangepicker/daterangepicker.js",
+              "./src/assets/vendor/slick/slick.min.js",
+              "./src/assets/js/slick-custom.js",
+              "./src/assets/vendor/parallax100/parallax100.js",
+              "./src/assets/vendor/MagnificPopup/jquery.magnific-popup.min.js",
+              "./src/assets/vendor/isotope/isotope.pkgd.min.js",
+              "./src/assets/vendor/sweetalert/sweetalert.min.js",
+              "./src/assets/vendor/perfect-scrollbar/perfect-scrollbar.min.js",
+              "./src/assets/js/main.js"]
           },
           "configurations": {
             "production": {
