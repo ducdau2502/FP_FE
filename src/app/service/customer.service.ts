@@ -20,6 +20,18 @@ export class CustomerService {
     return this.http.post(this.API_CUSTOMER + `cart/${account_id}/${product_id}`);
   }
 
+  //Tăng số lượng trong giỏ hàng
+  plusQuantity(account_id: any, product_id: any): Observable<any> {
+    // @ts-ignore
+    return this.http.post(this.API_CUSTOMER + `plus/${account_id}/${product_id}`);
+  }
+
+  //Giảm số lượng trong giỏ hàng
+  minusQuantity(account_id: any, product_id: any): Observable<any> {
+    // @ts-ignore
+    return this.http.post(this.API_CUSTOMER + `minus/${account_id}/${product_id}`);
+  }
+
   //Hiển thị tất cả sản phẩm trong giỏ hàng
   showCart(account_id: any): Observable<any> {
     return this.http.get(this.API_CUSTOMER + `cart/${account_id}`);
