@@ -38,14 +38,18 @@ export class StoreListComponent implements OnInit {
   getAllStore() {
     this.homeService.getAllStore().subscribe(data => {
       this.stores = data;
-      this.flag = [];
+      // this.flag = [];
       for (let a of this.stores) {
-        this.customerService.checkLikeStore(a.id, this.account_id).subscribe((data) => {
-          this.flag.push(data)
-          console.log(data)
+        console.log(a.id);
 
-        })
-      }console.log(this.flag)
+        // this.customerService.checkLikeStore(a.id, this.account_id).subscribe((data) => {
+        //   this.flag.push(data)
+        //   console.log(a.id)
+        //
+        // })
+
+      }
+      // console.log(this.flag)
     })
   }
 
@@ -85,6 +89,13 @@ export class StoreListComponent implements OnInit {
   likeStore(store_id: any) {
     this.customerService.likeStore(store_id, this.account_id).subscribe(
       () => {
+        for (let i = 0; i < this.stores.length; i++) {
+          if(this.stores[i].id == store_id){
+            this.customerService.checkLikeStore(store_id, this.account_id).subscribe((data) => {
+              this.flag[i] = data;
+            })
+          }
+        }
         this.getAllStore();
       })
   }
@@ -99,10 +110,11 @@ export class StoreListComponent implements OnInit {
       this.flag = [];
       for (let a of this.stores) {
         this.customerService.checkLikeStore(a.id, this.account_id).subscribe((data) => {
-          this.flag.push(data)
-
+          this.flag.push(data);
+          console.log(a.id);
+          console.log(this.flag);
         })
-      }console.log(this.flag)
+      }
     })
   }
 }
