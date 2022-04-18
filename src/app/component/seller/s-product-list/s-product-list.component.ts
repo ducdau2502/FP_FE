@@ -11,6 +11,9 @@ import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {FileUploadService} from "../../../service/file-upload.service";
 import {NgToastService} from "ng-angular-popup";
 import {StoreCategories} from "../../../model/store-categories";
+import {Voucher} from "../../../model/voucher";
+import {Bill} from "../../../model/bill";
+import {RevenueTime} from "../../../model/response/revenue-time";
 
 @Component({
   selector: 'app-s-product-list',
@@ -24,7 +27,12 @@ export class SProductListComponent implements OnInit {
   productImage!: ProductImage;
   message: string = '';
   categories!: StoreCategories[];
+  vouchers!: Voucher[];
   user!: AccountDetail;
+  bills!: Bill[];
+  revenue = 0;
+  totalRevenue = 0;
+  time!: RevenueTime;
 
   selectedFiles?: FileList;
   currentFileUpload?: FileUpload;
@@ -34,6 +42,16 @@ export class SProductListComponent implements OnInit {
 
   categoryForm = new FormGroup({
     name: new FormControl("")
+  })
+
+  voucherForm = new FormGroup({
+    name: new FormControl(""),
+    discount: new FormControl("")
+  })
+
+  revenueForm = new FormGroup({
+    start: new FormControl(""),
+    end: new FormControl("")
   })
 
   idUser= this.tokenService.getUser().id;
@@ -68,6 +86,8 @@ export class SProductListComponent implements OnInit {
         this.store = store;
         this.getAllProducts();
         this.getAllCategories();
+        this.getAllVoucher();
+        this.getTotalRevenue();
       })
       }
     );
@@ -179,6 +199,54 @@ export class SProductListComponent implements OnInit {
     this.sellerService.saveCategory(this.store.id, id_category).subscribe(() => {
       this.getUser();
     })
+  }
+
+  getAllVoucher() {
+    this.sellerService.getVoucher(this.store.id).subscribe(data => {
+      this.vouchers = data
+    })
+  }
+
+  saveVoucher() {
+    const voucher = {
+      name: this.voucherForm.value.name,
+      discount: this.voucherForm.value.discount,
+      store: this.store
+    }
+    this.sellerService.createVoucher(voucher).subscribe(() => {
+      this.getAllVoucher();
+      this.voucherForm.reset();
+    })
+  }
+
+  deleteVoucher(id: any) {
+    this.sellerService.deleteVoucher(id).subscribe(() => {
+      this.getAllVoucher();
+    })
+  }
+
+  getRevenue() {
+    this.time = {
+      start: this.revenueForm.value.start,
+      end: this.revenueForm.value.end
+    }
+    this.sellerService.getRevenue(this.store.id, this.time).subscribe(
+      response => {
+        // @ts-ignore
+        const { bills, totalRevenue } = response;
+        this.bills = bills;
+        this.revenue = totalRevenue;
+      });
+  }
+
+  getTotalRevenue() {
+    this.sellerService.getAllRevenue(this.store.id).subscribe(
+      response => {
+        // @ts-ignore
+        const { bills, totalRevenue } = response;
+        this.bills = bills;
+        this.totalRevenue = totalRevenue;
+      });
   }
 
 }
