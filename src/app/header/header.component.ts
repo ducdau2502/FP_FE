@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {TokenStorageService} from "../service/auth/token-storage.service";
 import {HomeService} from "../service/home.service";
 import {AccountDetail} from "../model/account-detail";
+import {CustomerService} from "../service/customer.service";
+import {Cart} from "../model/cart";
 
 @Component({
   selector: 'app-header',
@@ -18,8 +20,14 @@ export class HeaderComponent implements OnInit {
   username?: string;
   user?: AccountDetail;
   id?: number;
+
+  carts!: Cart[];
+
+
   constructor(private tokenStorageService: TokenStorageService,
+              private customerService: CustomerService,
               private homeService: HomeService) { }
+
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
     if (this.isLoggedIn) {
@@ -31,6 +39,7 @@ export class HeaderComponent implements OnInit {
       this.username = user.username;
       this.id  = user.id;
       this.getAccountDetail();
+      this.getAllCart();
     }
   }
   logout(): void {
@@ -43,6 +52,13 @@ export class HeaderComponent implements OnInit {
         this.user = data;
       }
     );
+  }
+
+  getAllCart() {
+    this.customerService.showCart(2).subscribe(data => {
+      this.carts = data;
+      console.log(data);
+    })
   }
 
 }
