@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {CustomerService} from "../../service/customer.service";
 import {TokenStorageService} from "../../service/auth/token-storage.service";
 import {Cart} from "../../model/cart";
+import {NgToastService} from "ng-angular-popup";
 
 @Component({
   selector: 'app-cart',
@@ -16,7 +17,8 @@ export class CartComponent implements OnInit {
   carts!: Cart[];
 
   constructor(private customerService: CustomerService,
-              private tokenStorageService: TokenStorageService) { }
+              private tokenStorageService: TokenStorageService,
+              private toast: NgToastService) { }
 
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
@@ -47,4 +49,12 @@ export class CartComponent implements OnInit {
       this.getAllCart();
     });
   }
+
+  deleteProduct(product_id: any) {
+    this.customerService.deleteProduct(this.id, product_id).subscribe(() => {
+      this.toast.success({detail:"Successful Message", summary: "Delete Product Successful", duration: 5000})
+      this.getAllCart();
+    })
+  }
+
 }
