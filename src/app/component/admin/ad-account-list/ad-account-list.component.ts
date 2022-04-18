@@ -48,9 +48,6 @@ export class AdAccountListComponent implements OnInit {
         this.accounts = accounts;
         this.count = totalItems;
         console.log(response);
-      },
-      error => {
-        console.log(error);
       });
   }
 
