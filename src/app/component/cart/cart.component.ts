@@ -57,4 +57,11 @@ export class CartComponent implements OnInit {
     })
   }
 
+  addBill() {
+    this.customerService.addBill(this.id).subscribe(() => {
+      this.toast.success({detail:"Successful Message", summary: "Pay Money Successful", duration: 5000})
+      this.getAllCart();
+    })
+  }
+
 }

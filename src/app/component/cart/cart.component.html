@@ -1,39 +1,83 @@
-<table class="table table-hover">
-  <thead>
-  <tr>
-    <th>#</th>
-    <th>Name</th>
-    <th>Quantity</th>
-    <th>Choose Product</th>
-    <th colspan="2">Action</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let c of carts; index as i">
-    <td> {{i + 1}} </td>
-    <td>{{c.product?.name}}</td>
-    <td>
-      <div class="wrap-num-product flex-w m-r-20 m-tb-10">
-        <button [disabled]="c.quantity == 1" (click)="minusQuantity(c.product?.id)" class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-          <i class="fs-16 zmdi zmdi-minus"></i>
-        </button>
+<div class="container">
+  <button type="button" class="btn btn-primary" style="margin-right: 10px" data-bs-toggle="modal" data-bs-target="#modalPayment">
+    Payment
+  </button>
+  <br>
+  <br>
+  <table class="table table-hover">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Quantity</th>
+      <th>Choose Product</th>
+      <th colspan="2">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let c of carts; index as i">
+      <td> {{i + 1}} </td>
+      <td>{{c.product?.name}}</td>
+      <td>
+        <div class="wrap-num-product flex-w m-r-20 m-tb-10">
+          <button [disabled]="c.quantity == 1" (click)="minusQuantity(c.product?.id)" class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
+            <i class="fs-16 zmdi zmdi-minus"></i>
+          </button>
 
-        <input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="{{c.quantity}}">
+          <input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="{{c.quantity}}">
 
-        <button [disabled]="c.quantity == c.product?.inventoryQuantity" (click)="plusQuantity(c.product?.id)" class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-          <i class="fs-16 zmdi zmdi-plus"></i>
+          <button [disabled]="c.quantity == c.product?.inventoryQuantity" (click)="plusQuantity(c.product?.id)" class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
+            <i class="fs-16 zmdi zmdi-plus"></i>
+          </button>
+        </div>
+      </td>
+      <td>
+        <input type="checkbox" class="md-checkbox">
+      </td>
+      <td>
+        <button class="btn btn-danger" (click)="deleteProduct(c.product?.id)">
+          <i class="fa-solid fa-ban" style="margin-right: 3px"></i>
+          Delete
         </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+</div>
+
+<!-- ModalPayment -->
+<div class="modal fade" id="modalPayment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" ><b>Bill Payment</b></h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-    </td>
-    <td>
-      <input type="checkbox" class="md-checkbox">
-    </td>
-    <td>
-      <button class="btn btn-danger" (click)="deleteProduct(c.product?.id)">
-        <i class="fa-solid fa-ban" style="margin-right: 3px"></i>
-        Delete
-      </button>
-    </td>
-  </tr>
-  </tbody>
-</table>
+      <div class="modal-body">
+        <table class="table table-hover">
+          <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Quantity</th>
+            <th>Total Price($)</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let c of carts; index as i">
+            <td> {{i + 1}} </td>
+            <td>{{c.product?.name}}</td>
+            <td>{{c.quantity}}</td>
+            <td>{{c.quantity}} * {{c.product?.price}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-danger" data-bs-dismiss="modal" (click)="addBill()">Accept</button>
+      </div>
+    </div>
+  </div>
+</div>

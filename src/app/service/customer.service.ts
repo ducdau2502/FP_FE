@@ -61,4 +61,9 @@ export class CustomerService {
     return this.http.get(this.API_CUSTOMER + `check/${store_id}/${account_id}`);
   }
 
+  //Mua hàng
+  addBill(account_id: any): Observable<any> {
+    // @ts-ignore
+    return this.http.post(this.API_CUSTOMER + `pay/${account_id}`);
+  }
 }
