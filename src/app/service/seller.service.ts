@@ -6,6 +6,9 @@ import {Observable} from "rxjs";
 import {ProductImage} from "../model/product-image";
 import {Store} from "../model/store";
 import {StoreCategories} from "../model/store-categories";
+import {Bill} from "../model/bill";
+import {Voucher} from "../model/voucher";
+import {RevenueTime} from "../model/response/revenue-time";
 
 @Injectable({
   providedIn: 'root'
@@ -58,6 +61,26 @@ export class SellerService {
 
   saveCategory(id_store: any, id_category: any): Observable<StoreCategories> {
     return this.http.get<StoreCategories>(this.API_SELLER + `store/${id_store}/${id_category}`);
+  }
+
+  getRevenue(id_store: any, revenue: RevenueTime) : Observable<Bill[]>{
+    return this.http.post<Bill[]>(this.API_SELLER + `revenue/${id_store}`, revenue);
+  }
+
+  getAllRevenue(id_store: any) : Observable<any>{
+    return this.http.get<any>(this.API_SELLER + `total-revenue/${id_store}`);
+  }
+
+  getVoucher(id_store: any) : Observable<any>{
+    return this.http.get<any>(this.API_SELLER + `find-voucher/${id_store}`);
+  }
+
+  createVoucher(voucher: Voucher) : Observable<Bill[]> {
+    return this.http.post<Bill[]>(this.API_SELLER + `create-voucher`, voucher);
+  }
+
+  deleteVoucher(id: any): Observable<any> {
+    return this.http.delete(this.API_SELLER + `delete-voucher/${id}`);
   }
 
 }
