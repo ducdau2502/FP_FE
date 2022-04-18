@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from "../../service/auth/auth.service";
+import {FormArray, FormBuilder} from "@angular/forms";
 
 @Component({
   selector: 'app-register',
@@ -11,36 +12,30 @@ export class RegisterComponent implements OnInit {
     username: null,
     email: null,
     password: null,
-
     fullName:null,
     age : null,
-    gender: null,
     address: null,
     identityCard: null,
-    avatar: null,
-    dateCreate:null,
     bankAccount:null,
     statusName:null,
   };
   isSuccessful = false;
   isSignUpFailed = false;
   errorMessage = '';
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService,fb: FormBuilder) {
+  }
   ngOnInit(): void {
   }
   onSubmit(): void {
     const { username, email, password,
-      fullName,age,gender,address,identityCard,avatar,dateCreate,bankAccount,statusName} = this.form;
+      fullName,age,address,identityCard,bankAccount,statusName} = this.form
     this.authService.register(username,
       email,
       password,
       fullName,
       age,
-      gender,
       address,
       identityCard,
-      avatar,
-      dateCreate,
       bankAccount,
       statusName
     ).subscribe({

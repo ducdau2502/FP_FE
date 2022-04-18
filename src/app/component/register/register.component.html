@@ -1,125 +1,140 @@
-<div class="col-md-12">
-  <div class="card card-container">
-    <img
-      id="profile-img"
-      src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-      class="profile-img-card"
-    />
-    <form
-      *ngIf="!isSuccessful"
-      name="form"
-      (ngSubmit)="f.form.valid && onSubmit()"
-      #f="ngForm"
-      novalidate
-    >
-      <div class="form-group">
-        <label form="username">Username</label>
-        <input
-          type="text"
-          class="form-control"
-          name="username"
-          [(ngModel)]="form.username"
-          required
-          minlength="3"
-          maxlength="20"
-          #username="ngModel"
-        />
-        <div class="alert-danger" *ngIf="username.errors && f.submitted">
-          <div *ngIf="username.errors['required']">Username is required</div>
-          <div *ngIf="username.errors['minlength']">
-            Username must be at least 3 characters
-          </div>
-          <div *ngIf="username.errors['maxlength']">
-            Username must be at most 20 characters
-          </div>
+
+<div class="main">
+
+  <!-- Sign up form -->
+  <section class="signup">
+    <div class="container">
+      <div class="signup-content">
+        <div class="signup-form">
+          <h2 class="form-title">Sign up</h2>
+
+          <form
+            *ngIf="!isSuccessful"
+            name="form"
+            (ngSubmit)="onSubmit()"
+            #f="ngForm"
+            novalidate>
+
+            <div class="form-group">
+              <label form="username"><i class="zmdi zmdi-account material-icons-name"></i></label>
+              <input
+                type="text"
+                class="form-control"
+                name="username"
+                [(ngModel)]="form.username"
+                required
+                minlength="3"
+                maxlength="20"
+                #username="ngModel"
+                placeholder="Your Name"/>
+<!--              <div class="alert-danger" *ngIf="username.errors && f.submitted">-->
+<!--                <div *ngIf="username.errors['required']">Username is required</div>-->
+<!--                <div *ngIf="username.errors['minlength']">-->
+<!--                  Username must be at least 3 characters-->
+<!--                </div>-->
+<!--                <div *ngIf="username.errors['maxlength']">-->
+<!--                  Username must be at most 20 characters-->
+<!--                </div>-->
+<!--              </div>-->
+            </div>
+
+            <div class="form-group">
+              <label form="email"><i class="zmdi zmdi-email"></i></label>
+              <input  type="email"
+                      class="form-control"
+                      name="email"
+                      [(ngModel)]="form.email"
+                      required
+                      email
+                      #email="ngModel"
+              />
+            </div>
+
+            <div class="form-group">
+              <label><i class="zmdi zmdi-lock"></i></label>
+              <input type="password"
+                     class="form-control"
+                     name="password"
+                     [(ngModel)]="form.password"
+                     required
+                     minlength="6"
+                     #password="ngModel"
+              />
+            </div>
+
+<!--            new input-->
+
+            <div class="form-group">
+              <label form="fullName"><i class="zmdi zmdi-border-color"></i></label>
+              <input type="text"
+                     name="fullName"
+                     class="form-control"
+                     id="fullName"
+                     [ngModel]="form.fullName"
+                     #fullName = "ngModel"
+                     placeholder="Full name"/>
+            </div>
+
+            <div class="form-group">
+              <label form="age"><i class="zmdi zmdi-n-6-square"></i></label>
+              <input type="text"
+                     name="age"
+                     class="form-control"
+                     id="age"
+                     [ngModel]="form.age"
+                     #age = "ngModel"
+                     placeholder="Your Age"/>
+            </div>
+
+
+            <div class="form-group">
+              <label form="address"><i class="zmdi zmdi-pin-drop"></i></label>
+              <input type="text"
+                     name="address"
+                     id="address"
+                     class="form-control"
+                     [ngModel]="form.address"
+                     #address = "ngModel"
+                     placeholder="Your Address"/>
+            </div>
+
+
+            <div class="form-group">
+              <label form="identityCard"><i class="zmdi zmdi-accounts-list"></i></label>
+              <input type="text"
+                     name="identityCard"
+                     class="form-control"
+                     id="identityCard"
+                     [ngModel]="form.identityCard"
+                     #identityCard = "ngModel"
+                     placeholder="Your Identity Card"/>
+
+            </div>
+
+
+            <div class="form-group">
+              <label form="bankAccount"><i class="zmdi zmdi-card"></i></label>
+              <input type="text"
+                     class="form-control"
+                     name="bankAccount"
+                     id="bankAccount"
+                     [ngModel]="form.bankAccount"
+                     placeholder="Your Bank Account"/>
+            </div>
+
+            <div class="form-group">
+              <input type="checkbox" name="agree-term" id="agree-term" class="agree-term"  />
+              <label for="agree-term" class="label-agree-term"><span><span></span></span>Become a brand partner <a href="#" class="term-service"> Terms of your system</a></label>
+            </div>
+            <div class="form-group form-button">
+              <input type="submit" name="signup" id="signup" class="form-submit" value="Register"/>
+            </div>
+          </form>
+        </div>
+        <div class="signup-image">
+          <figure><img src="assets/images/signup-image.jpg" alt="sing up image"></figure>
         </div>
       </div>
-      <div class="form-group">
-        <label form="email">Email</label>
-        <input
-          type="email"
-          class="form-control"
-          name="email"
-          [(ngModel)]="form.email"
-          required
-          email
-          #email="ngModel"
-        />
-        <div class="alert-danger" *ngIf="email.errors && f.submitted">
-          <div *ngIf="email.errors['required']">Email is required</div>
-          <div *ngIf="email.errors['email']">
-            Email must be a valid email address
-          </div>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label form="password">Password</label>
-        <input
-          type="password"
-          class="form-control"
-          name="password"
-          [(ngModel)]="form.password"
-          required
-          minlength="6"
-          #password="ngModel"
-        />
-        <div class="alert-danger" *ngIf="password.errors && f.submitted">
-          <div *ngIf="password.errors['required']">Password is required</div>
-          <div *ngIf="password.errors['minlength']">
-            Password must be at least 6 characters
-          </div>
-        </div>
-      </div>
-
-<!--      <div class="form-group">-->
-<!--        <label form="fullName">Your Full Name</label>-->
-<!--        <input-->
-<!--          type="text"-->
-<!--          class="form-control"-->
-<!--          name="fullName"-->
-<!--          [(ngModel)]="form.fullName"-->
-<!--        />-->
-<!--      </div>-->
-<!--      <div class="form-group">-->
-<!--        <label form="age">Your Age</label>-->
-<!--        <input-->
-<!--          type="number"-->
-<!--          class="form-control"-->
-<!--          name="age"-->
-<!--          [(ngModel)]="form.age"-->
-<!--        />-->
-<!--      </div>-->
-
-<!--      <div class="form-group">-->
-<!--        <label form="address">Your Age</label>-->
-<!--        <input-->
-<!--          type="text"-->
-<!--          class="form-control"-->
-<!--          name="age"-->
-<!--          [(ngModel)]="form.age"-->
-<!--        />-->
-<!--      </div>-->
-
-<!--      <div class="form-group">-->
-<!--        <label form="address">Roles</label>-->
-<!--        <select class="form-select">-->
-<!--          <option value="user">User</option>-->
-<!--          <option value="seller">Seller</option>-->
-<!--        </select>-->
-<!--      </div>-->
-
-
-
-      <div class="form-group">
-        <button class="btn btn-primary btn-block">Sign Up</button>
-      </div>
-      <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
-        Signup failed!<br />{{ errorMessage }}
-      </div>
-    </form>
-    <div class="alert alert-success" *ngIf="isSuccessful">
-      Your registration is successful!
     </div>
-  </div>
+  </section>
 </div>

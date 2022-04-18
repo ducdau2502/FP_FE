@@ -22,11 +22,8 @@ export class AuthService {
            password:string,
            fullName:string,
            age : number,
-           gender: number,
            address: string,
            identityCard: string,
-           avatar: string,
-           dateCreate: null,
            bankAccount:number,
            statusName:string):
     Observable<any> {
@@ -36,11 +33,8 @@ export class AuthService {
       password,
       fullName,
       age,
-      gender,
       address,
       identityCard,
-      avatar,
-      dateCreate,
       bankAccount,
       statusName
     }, httpOptions);
