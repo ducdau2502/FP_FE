@@ -4,6 +4,6 @@ import {Store} from "./store";
 export interface StoreRating {
   id?: number;
   level?: number;
-  accountRating?: AccountDetail;
-  storeRating?: Store;
+  account?: AccountDetail;
+  store?: Store;
 }
