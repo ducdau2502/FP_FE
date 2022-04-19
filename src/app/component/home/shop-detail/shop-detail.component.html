@@ -39,7 +39,7 @@
           <a class="nav-link active" data-toggle="tab" href="#description" role="tab">Description</a>
         </li>
         <li class="nav-item p-b-10">
-          <a class="nav-link" data-toggle="tab" href="#reviews" role="tab">Reviews (1)</a>
+          <a class="nav-link" data-toggle="tab" href="#reviews" role="tab">Reviews ({{ratings?.length}})</a>
         </li>
       </ul>
 
@@ -59,55 +59,39 @@
         <div class="tab-pane fade" id="reviews" role="tabpanel">
           <div class="row">
             <div class="col-sm-10 col-md-8 col-lg-6 m-lr-auto">
-              <div class="p-b-30 m-lr-15-sm">
+              <div class="p-b-30 m-lr-15-sm" *ngIf="showCustomerBoard">
                 <!-- Review -->
-                <div class="flex-w flex-t p-b-68">
+                <div class="flex-w flex-t p-b-68" *ngFor="let r of ratings">
                   <div class="wrap-pic-s size-109 bor0 of-hidden m-r-18 m-t-6">
-                    <img src="assets/images/avatar-01.jpg" alt="AVATAR">
+                    <img src="{{r.account?.avatar}}" alt="AVATAR">
                   </div>
 
                   <div class="size-207">
                     <div class="flex-w flex-sb-m p-b-17">
 													<span class="mtext-107 cl2 p-r-20">
-														Ariana Grande
+														{{r.account?.fullName}}
 													</span>
 
-                      <span class="fs-18 cl11">
-														<i class="zmdi zmdi-star"></i>
-														<i class="zmdi zmdi-star"></i>
-														<i class="zmdi zmdi-star"></i>
-														<i class="zmdi zmdi-star"></i>
-														<i class="zmdi zmdi-star-half"></i>
-													</span>
+                          <span class="fs-18 cl11">
+														<ngx-star-rating [(ngModel)]="r.level" [disabled]="true"></ngx-star-rating>
+                          </span>
                     </div>
                   </div>
                 </div>
 
                 <!-- Add review -->
-                <form class="w-full">
-                  <h5 class="mtext-108 cl2 p-b-7">
-                    Add a rating
-                  </h5>
-
-                  <div class="flex-w flex-m p-t-50 p-b-23">
+                <div class="flex-w flex-m p-t-50 p-b-23">
 												<span class="stext-102 cl3 m-r-16">
 													Your Rating
 												</span>
 
-                    <span class="wrap-rating fs-18 cl11 pointer">
-													<i class="item-rating pointer zmdi zmdi-star-outline"></i>
-													<i class="item-rating pointer zmdi zmdi-star-outline"></i>
-													<i class="item-rating pointer zmdi zmdi-star-outline"></i>
-													<i class="item-rating pointer zmdi zmdi-star-outline"></i>
-													<i class="item-rating pointer zmdi zmdi-star-outline"></i>
-													<input class="dis-none" type="number" name="rating">
-												</span>
-                  </div>
-
-                  <button class="flex-c-m stext-101 cl0 size-112 bg7 bor11 hov-btn3 p-lr-15 trans-04 m-b-10">
-                    Submit
-                  </button>
-                </form>
+                  <form [formGroup]="form" >
+                    <ngx-star-rating formControlName="rating" [id]="'rating'"></ngx-star-rating>
+                    <button (click)="createRating()" class="flex-c-m stext-101 cl0 size-112 bg7 bor11 hov-btn3 p-lr-15 trans-04 m-b-10">
+                      Submit
+                    </button>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
@@ -148,7 +132,8 @@
 
           <div class="block2-txt flex-w flex-t p-t-14">
             <div class="block2-txt-child1 flex-col-l ">
-              <a [routerLink]="['/product-detail']" (click)="saveId(p.id, 'product_id')" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+              <a [routerLink]="['/product-detail']" (click)="saveId(p.id, 'product_id')"
+                 class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
                 {{p.name}}
               </a>
               <span class="stext-105 cl3">

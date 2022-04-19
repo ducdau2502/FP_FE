@@ -93,4 +93,9 @@ export class HomeService {
     return this.http.get<Store>(this.API_HOME + `/detail-store/${id}`);
   }
 
+  //find rating
+  findRating(store_id: any): Observable<any> {
+    return this.http.get(this.API_HOME + `/find-rating/${store_id}`);
+  }
+
 }

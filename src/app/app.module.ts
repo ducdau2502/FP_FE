@@ -32,6 +32,7 @@ import {NgToastModule} from "ng-angular-popup";
 import {NgxPaginationModule} from "ngx-pagination";
 import { CartComponent } from './component/cart/cart.component';
 import { StoreLikeComponent } from './component/home/store-like/store-like.component';
+import {NgxStarRatingModule} from "ngx-star-rating";
 
 
 @NgModule({
@@ -71,6 +72,7 @@ import { StoreLikeComponent } from './component/home/store-like/store-like.compo
     AngularFireDatabaseModule,
     NgToastModule,
     NgxPaginationModule,
+    NgxStarRatingModule
   ],
   bootstrap: [AppComponent]
 })
