@@ -31,7 +31,6 @@
 
 
 
-
 <!-- Product -->
 <section class="bg0 p-t-23 p-b-140">
   <div class="container">
@@ -45,13 +44,7 @@
                 data-filter=".women">
           All Stores
         </button>
-        <button *ngIf="showCustomerBoard" [routerLink]="['/store-like']" class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
-                data-filter=".women">
-          All Favorite Stores
-        </button>
       </div>
-
-
 
       <!-- Search product -->
       <div class="panel-search w-full p-t-10 p-b-15">
@@ -62,52 +55,10 @@
         </div>
       </div>
 
-      <!-- Filter -->
-      <div class=" panel-filter w-full p-t-10">
-        <div class="wrap-filter flex-w bg6 w-full p-lr-40 p-t-27 p-lr-15-sm">
-          <div class="filter-col1 p-r-15 p-b-27">
-            <div class="mtext-102 cl2 p-b-15">
-              Sort By
-            </div>
-
-            <ul>
-              <li class="p-b-6">
-                <a (click)="getAllStore()" class="filter-link stext-106 trans-04">
-                  Default
-                </a>
-              </li>
-
-              <li class="p-b-6">
-                <a (click)="topStoreSale()" class="filter-link stext-106 trans-04">
-                  Top Store Sale
-                </a>
-              </li>
-            </ul>
-          </div>
-
-
-          <div class="filter-col2 p-r-15 p-b-27">
-            <div class="mtext-102 cl2 p-b-15">
-              Category
-            </div>
-
-            <ul *ngFor="let c of categories">
-
-              <li class="p-b-6">
-                <a (click)="findAllByCategoriesList_Id(c.id)" class="filter-link stext-106 trans-04">
-                  {{c.name}}
-                </a>
-              </li>
-
-            </ul>
-          </div>
-
-        </div>
-      </div>
     </div>
 
     <div class="row isotope-grid">
-
+      <h3 *ngIf="stores?.length == 0"> List favorite is empty</h3>
       <div *ngFor="let store of stores, index as i" class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
         <!-- Block2 -->
         <div class="block2">

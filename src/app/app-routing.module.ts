@@ -13,6 +13,7 @@ import {AdStoreListComponent} from "./component/admin/ad-store-list/ad-store-lis
 import { SProductListComponent } from './component/seller/s-product-list/s-product-list.component';
 import {EditProductComponent} from "./component/seller/edit-product/edit-product.component";
 import {CartComponent} from "./component/cart/cart.component";
+import {StoreLikeComponent} from "./component/home/store-like/store-like.component";
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path:"store-detail",
     component: ShopDetailComponent
+  },
+  {
+    path:"store-like",
+    component: StoreLikeComponent
   },
   {
     path:"product-detail",

@@ -31,6 +31,7 @@ import { EditProductComponent } from './component/seller/edit-product/edit-produ
 import {NgToastModule} from "ng-angular-popup";
 import {NgxPaginationModule} from "ngx-pagination";
 import { CartComponent } from './component/cart/cart.component';
+import { StoreLikeComponent } from './component/home/store-like/store-like.component';
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import { CartComponent } from './component/cart/cart.component';
     AdStoreListComponent,
     AdAccountDetailComponent,
     EditProductComponent,
-    CartComponent
+    CartComponent,
+    StoreLikeComponent
   ],
 
   providers: [authInterceptorProviders],
