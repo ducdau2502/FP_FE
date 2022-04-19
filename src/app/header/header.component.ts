@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit {
   showCustomerBoard = false;
   username?: string;
   user?: AccountDetail;
-  id?: number;
+  id?: any;
 
   carts!: Cart[];
 
@@ -37,7 +37,7 @@ export class HeaderComponent implements OnInit {
       this.showSellerBoard = this.roles.includes('ROLE_SELLER');
       this.showCustomerBoard = this.roles.includes('ROLE_CUSTOMER');
       this.username = user.username;
-      this.id  = user.id;
+      this.id = user.id;
       this.getAccountDetail();
       this.getAllCart();
     }
@@ -55,10 +55,20 @@ export class HeaderComponent implements OnInit {
   }
 
   getAllCart() {
-    this.customerService.showCart(2).subscribe(data => {
+    this.customerService.showCart(this.id).subscribe(data => {
       this.carts = data;
-      console.log(data);
     })
   }
 
+  minusQuantity(product_id: any) {
+    this.customerService.minusQuantity(this.id, product_id).subscribe(() => {
+      this.getAllCart();
+    });
+  }
+
+  plusQuantity(product_id: any) {
+    this.customerService.plusQuantity(this.id, product_id).subscribe(() => {
+      this.getAllCart();
+    });
+  }
 }

@@ -12,6 +12,8 @@ import {AdAccountDetailComponent} from "./component/admin/ad-account-detail/ad-a
 import {AdStoreListComponent} from "./component/admin/ad-store-list/ad-store-list.component";
 import { SProductListComponent } from './component/seller/s-product-list/s-product-list.component';
 import {EditProductComponent} from "./component/seller/edit-product/edit-product.component";
+import {CartComponent} from "./component/cart/cart.component";
+import {StoreLikeComponent} from "./component/home/store-like/store-like.component";
 
 const routes: Routes = [
   {
@@ -25,6 +27,10 @@ const routes: Routes = [
   {
     path:"store-detail",
     component: ShopDetailComponent
+  },
+  {
+    path:"store-like",
+    component: StoreLikeComponent
   },
   {
     path:"product-detail",
@@ -62,6 +68,11 @@ const routes: Routes = [
   },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  //customer
+  {
+    path:"cus-cart",
+    component: CartComponent
+  }
 ];
 
 @NgModule({

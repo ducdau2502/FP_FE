@@ -27,8 +27,14 @@
   <button type="button" class="btn btn-primary" style="margin-right: 10px" data-bs-toggle="modal" data-bs-target="#exampleModal">
     Add Product
   </button>
-  <button type="button" class="btn btn-primary" style="margin-right: 10px" data-bs-toggle="modal" data-bs-target="#modal2">
-    Create Category
+  <button type="button" class="btn btn-primary" style="margin-right: 10px" data-bs-toggle="modal" data-bs-target="#modalCategory">
+    Category
+  </button>
+  <button type="button" class="btn btn-primary" style="margin-right: 10px" data-bs-toggle="modal" data-bs-target="#modalRevenue">
+    Revenue
+  </button>
+  <button type="button" class="btn btn-primary" style="margin-right: 10px" data-bs-toggle="modal" data-bs-target="#modalVoucher">
+    Voucher
   </button>
 
   <div class="panel-search w-full p-t-10 p-b-15">
@@ -66,7 +72,7 @@
                 (click)="editProduct(p.id)">
           <i class="fa-regular fa-circle-check" style="margin-right: 3px"></i>
           Edit
-        </button>
+        </button> |
         <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete"
                 (click)="getProductById(p.id)">
           <i class="fa-solid fa-ban" style="margin-right: 3px"></i>
@@ -137,7 +143,7 @@
 </div>
 
 <!-- Modal2 -->
-<div class="modal fade" id="modal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalCategory" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -196,6 +202,118 @@
       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       <button type="submit" class="btn btn-danger" data-bs-dismiss="modal" (click)="deleteProduct(productDelete.id)">Delete</button>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Voucher -->
+<div class="modal fade" id="modalVoucher" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" ><b>Voucher</b></h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h3>List Voucher</h3>
+        <table class="table table-hover">
+          <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Discount</th>
+            <th>Delete</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let v of vouchers; index as i">
+            <td> {{i + 1}} </td>
+            <td>{{v.name}}</td>
+            <td>{{v.discount}}</td>
+            <td >
+              <button class="btn btn-danger" (click)="deleteVoucher(v.id)">Delete</button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <h3>Create New Voucher</h3>
+        <form [formGroup]="voucherForm">
+          <div class="mb-3">
+            <label for="nameVoucher" class="form-label">Name:</label>
+            <input class="form-control" id="nameVoucher" formControlName="name" type="text">
+          </div>
+          <div class="mb-3">
+            <label for="discount" class="form-label">Discount(%):</label>
+            <input class="form-control" id="discount" formControlName="discount" type="number">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" (click)="saveVoucher()">Save</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Modal Revenue -->
+<div class="modal fade" id="modalRevenue" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" ><b>Revenue</b></h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Total revenue: {{totalRevenue}} $</p>
+        <h3>List Revenue</h3>
+        <table class="table table-hover">
+          <thead>
+          <tr>
+            <th>#</th>
+            <th>Date buy</th>
+            <th>Customer</th>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Voucher</th>
+            <th>Total revenue</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let b of bills; index as i">
+            <td> {{i + 1}} </td>
+            <td>{{b.dateCreate}}</td>
+            <td>{{b.customer?.fullName}}</td>
+            <td>{{b.product?.name}}</td>
+            <td>{{b.quantity}}</td>
+            <td *ngIf="b.voucher != null">{{b.voucher?.name}}</td>
+            <td *ngIf="b.voucher == null">0</td>
+            <td>{{b.totalPrice}}</td>
+          </tr>
+          <tr *ngIf="revenue != 0">
+            <th colspan="6">Revenue</th>
+            <th colspan="1">{{revenue}}</th>
+          </tr>
+          </tbody>
+        </table>
+        <h3>Find bill by time</h3>
+        <form [formGroup]="revenueForm">
+          <div class="mb-3">
+            <label for="startRevenue" class="form-label">Start time:</label>
+            <input class="form-control" id="startRevenue" formControlName="start" type="date">
+          </div>
+          <div class="mb-3">
+            <label for="endRevenue" class="form-label">End time:</label>
+            <input class="form-control" id="endRevenue" formControlName="end" type="date">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" (click)="getRevenue()">Get</button>
+          </div>
+        </form>
+      </div>
+
     </div>
   </div>
 </div>
