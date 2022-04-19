@@ -19,7 +19,6 @@
       <th>Store Owner</th>
       <th>Category</th>
       <th>Status</th>
-      <th>Avatar</th>
       <th colspan="2">Action</th>
     </tr>
     </thead>
@@ -31,7 +30,6 @@
       <td>{{s.storeOwner?.fullName}}</td>
       <td>{{s.categoriesList?.name}}</td>
       <td>{{s.storeOwner?.status}}</td>
-      <td><img src="{{s.avatar}}" alt="Error" style="width: 50px; height: auto"></td>
       <td>
         <button class="btn btn-danger" *ngIf="s.storeOwner?.status == 'Activated'" (click)="blockStore(s.storeOwner?.id)"><i class="fa-solid fa-ban" style="margin-right: 3px"></i> Block</button>
         <button class="btn btn-primary" *ngIf="s.storeOwner?.status != 'Activated'" (click)="blockStore(s.storeOwner?.id)"><i class="fa-regular fa-circle-check" style="margin-right: 3px"></i> Activate</button>
