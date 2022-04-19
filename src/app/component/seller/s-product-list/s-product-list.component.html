@@ -132,8 +132,8 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-<!--            <button *ngIf="percentage != 100" disabled type="submit" class="btn btn-primary" id="submit" (click)="submit()">Save</button>-->
-            <button  type="submit" class="btn btn-primary" id="submit" data-bs-dismiss="modal" (click)="submit()">Save</button>
+            <button *ngIf="percentage == 100" type="submit" class="btn btn-primary" id="submit" (click)="submit()">Save</button>
+<!--            <button  type="submit" class="btn btn-primary" id="submit" data-bs-dismiss="modal" (click)="submit()">Save</button>-->
           </div>
         </form>
       </div>
@@ -267,6 +267,21 @@
       </div>
       <div class="modal-body">
         <p>Total revenue: {{totalRevenue}} $</p>
+        <h3>Find bill by time</h3>
+        <form [formGroup]="revenueForm">
+          <div class="mb-3">
+            <label for="startRevenue" class="form-label">Start time:</label>
+            <input class="form-control" id="startRevenue" formControlName="start" type="date">
+          </div>
+          <div class="mb-3">
+            <label for="endRevenue" class="form-label">End time:</label>
+            <input class="form-control" id="endRevenue" formControlName="end" type="date">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" (click)="getRevenue()">Get</button>
+          </div>
+        </form>
         <h3>List Revenue</h3>
         <table class="table table-hover">
           <thead>
@@ -297,21 +312,6 @@
           </tr>
           </tbody>
         </table>
-        <h3>Find bill by time</h3>
-        <form [formGroup]="revenueForm">
-          <div class="mb-3">
-            <label for="startRevenue" class="form-label">Start time:</label>
-            <input class="form-control" id="startRevenue" formControlName="start" type="date">
-          </div>
-          <div class="mb-3">
-            <label for="endRevenue" class="form-label">End time:</label>
-            <input class="form-control" id="endRevenue" formControlName="end" type="date">
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary" (click)="getRevenue()">Get</button>
-          </div>
-        </form>
       </div>
 
     </div>
