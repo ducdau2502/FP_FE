@@ -64,4 +64,19 @@ export class CustomerService {
     // @ts-ignore
     return this.http.post(this.API_CUSTOMER + `pay/${account_id}`);
   }
+
+  //Get Discount
+  getDiscount(store_id: any): Observable<any> {
+    return this.http.get(this.API_CUSTOMER + `get-discount/${store_id}`);
+  }
+
+  //Get bills by customer_id
+  getBills(customer_id: any): Observable<any> {
+    return this.http.get(this.API_CUSTOMER + `get-bill/${customer_id}`);
+  }
+
+  //Get Total
+  getTotal(customer_id: any): Observable<any> {
+    return this.http.get(this.API_CUSTOMER + `get-total/${customer_id}`);
+  }
 }

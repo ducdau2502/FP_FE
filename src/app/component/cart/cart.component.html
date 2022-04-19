@@ -69,10 +69,12 @@
             <td> {{i + 1}} </td>
             <td>{{c.product?.name}}</td>
             <td>{{c.quantity}}</td>
-            <td>{{c.quantity}} * {{c.product?.price}}</td>
+            <td>{{c.totalPrice}}</td>
+<!--            <td>{{getDiscount(c)}}</td>-->
           </tr>
           </tbody>
         </table>
+        <div style="margin-top:10px"><h3><b>Total: </b> {{sum}}</h3></div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
