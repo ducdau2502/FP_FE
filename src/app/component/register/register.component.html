@@ -62,18 +62,16 @@
               />
             </div>
 
-<!--            new input-->
-
             <div class="form-group">
               <label form="fullName"><i class="zmdi zmdi-border-color"></i></label>
-              <input type="text"
-                     name="fullName"
-                     class="form-control"
-                     id="fullName"
-                     [ngModel]="form.fullName"
-                     #fullName = "ngModel"
-                     placeholder="Full name"/>
+              <input  type="text"
+                      class="form-control"
+                      name="fullName"
+                      [(ngModel)]="form.fullName"
+                      #fullName="ngModel"
+              />
             </div>
+
 
             <div class="form-group">
               <label form="age"><i class="zmdi zmdi-n-6-square"></i></label>
@@ -81,7 +79,7 @@
                      name="age"
                      class="form-control"
                      id="age"
-                     [ngModel]="form.age"
+                     [(ngModel)]="form.age"
                      #age = "ngModel"
                      placeholder="Your Age"/>
             </div>
@@ -93,7 +91,7 @@
                      name="address"
                      id="address"
                      class="form-control"
-                     [ngModel]="form.address"
+                     [(ngModel)]="form.address"
                      #address = "ngModel"
                      placeholder="Your Address"/>
             </div>
@@ -105,7 +103,7 @@
                      name="identityCard"
                      class="form-control"
                      id="identityCard"
-                     [ngModel]="form.identityCard"
+                     [(ngModel)]="form.identityCard"
                      #identityCard = "ngModel"
                      placeholder="Your Identity Card"/>
 
@@ -118,12 +116,14 @@
                      class="form-control"
                      name="bankAccount"
                      id="bankAccount"
-                     [ngModel]="form.bankAccount"
+                     [(ngModel)]="form.bankAccount"
                      placeholder="Your Bank Account"/>
             </div>
 
             <div class="form-group">
-              <input type="checkbox" name="agree-term" id="agree-term" class="agree-term"  />
+              <input type="checkbox"  id="agree-term" class="agree-term"
+                     name="test" (change)="testCheck($event)" [(ngModel)]="form.status"
+              />
               <label for="agree-term" class="label-agree-term"><span><span></span></span>Become a brand partner <a href="#" class="term-service"> Terms of your system</a></label>
             </div>
             <div class="form-group form-button">

@@ -22,13 +22,28 @@ export class RegisterComponent implements OnInit {
   isSuccessful = false;
   isSignUpFailed = false;
   errorMessage = '';
+  isStatus = false;
+
   constructor(private authService: AuthService,fb: FormBuilder) {
   }
   ngOnInit(): void {
   }
+  testCheck(event:any){
+    console.log(event.target.checked)
+
+  }
+
   onSubmit(): void {
+
+    if (this.isStatus){
+      this.form.statusName = "waiting";
+    } else {
+      this.form.statusName = "no";
+    }
+    console.log(this.form.statusName)
     const { username, email, password,
       fullName,age,address,identityCard,bankAccount,statusName} = this.form
+
     this.authService.register(username,
       email,
       password,
@@ -43,11 +58,16 @@ export class RegisterComponent implements OnInit {
         console.log(data);
         this.isSuccessful = true;
         this.isSignUpFailed = false;
+        // this.reloadPage();
       },
       error: err => {
         this.errorMessage = err.error.message;
         this.isSignUpFailed = true;
       }
     });
+  }
+
+  reloadPage(): void {
+    window.location.href ="home.html";
   }
 }

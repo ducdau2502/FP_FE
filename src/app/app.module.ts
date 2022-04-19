@@ -66,7 +66,7 @@ import {NgxPaginationModule} from "ngx-pagination";
     AngularFireStorageModule,
     AngularFireDatabaseModule,
     NgToastModule,
-    NgxPaginationModule
+    NgxPaginationModule,
   ],
   bootstrap: [AppComponent]
 })
