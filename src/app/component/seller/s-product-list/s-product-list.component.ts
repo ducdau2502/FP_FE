@@ -153,20 +153,28 @@ export class SProductListComponent implements OnInit {
       description: this.productForm.value.description,
       coverImage: this.currentFileUpload?.url
     };
-
-    this.sellerService.createProduct(this.store.id, product).subscribe(() => {
-      if (product.id == '') {
+    if (product.id == '') {
+      this.sellerService.createProduct(this.store.id, product).subscribe(() => {
         this.toast.success({detail: "Successful Message", summary: "Create Product Successful", duration: 5000})
-      } else {
+        this.percentage = 0;
+        this.productForm.reset();
+        this.getAllProducts();
+        // @ts-ignore
+        this.myInputVariable.nativeElement.value = '';
+      })
+    } else {
+      this.sellerService.updateProduct(product.id, product).subscribe(() => {
         this.toast.success({detail: "Successful Message", summary: "Update Product Successful", duration: 5000})
-      }
+        this.percentage = 0;
+        this.productForm.reset();
+        this.getAllProducts();
+        // @ts-ignore
+        this.myInputVariable.nativeElement.value = '';
+      })
+    }
 
-      // @ts-ignore
-      this.myInputVariable.nativeElement.value = '';
-      this.percentage = 0;
-      this.productForm.reset();
-      this.getAllProducts();
-    });
+    // @ts-ignore
+    document.getElementById("modal__header").innerHTML = 'Create new product';
   }
 
   submitStore(): void {
@@ -176,8 +184,8 @@ export class SProductListComponent implements OnInit {
       avatar: this.currentFileUpload?.url
     };
 
-    this.sellerService.saveStore(this.store.id, Store).subscribe( () => {
-        this.toast.success({detail:"Successful Message", summary: "Update Information Successful", duration: 5000})
+    this.sellerService.saveStore(this.store.id, Store).subscribe(() => {
+      this.toast.success({detail: "Successful Message", summary: "Update Information Successful", duration: 5000})
       this.storeForm.reset();
       this.getUser();
     });
@@ -186,16 +194,16 @@ export class SProductListComponent implements OnInit {
   editProduct(id: any) {
     this.sellerService.getProductById(id).subscribe(data => {
       this.productForm.patchValue(data);
+      // @ts-ignore
+      document.getElementById("modal__header").innerHTML = 'Update product';
     });
-    // @ts-ignore
-    document.getElementById('exampleModalLabel').innerText = 'Update Product';
   }
 
   search() {
     if (this.message == "") {
       this.getAllProducts();
     } else {
-      this.sellerService.findAllProductByStoreAndName(this.store.id ,this.message).subscribe(data => {
+      this.sellerService.findAllProductByStoreAndName(this.store.id, this.message).subscribe(data => {
         this.products = data;
       })
     }
@@ -291,5 +299,11 @@ export class SProductListComponent implements OnInit {
   showFormBill() {
     // @ts-ignore
     document.getElementById("showFormBill").style.display = "block";
+  }
+
+  resetForm() {
+    this.productForm.reset();
+    // @ts-ignore
+    document.getElementById("modal__header").innerHTML = 'Create new product';
   }
 }

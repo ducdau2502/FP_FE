@@ -48,7 +48,7 @@
     <div class="bor8 dis-flex p-l-15">
       <i class="zmdi zmdi-search size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04"></i>
       <input [(ngModel)]="message" (input)="search()" class="mtext-107 cl2 size-114 plh2 p-r-15" type="text"
-             name="search-product" placeholder="Search">
+             name="search-product" placeholder="Search by name">
     </div>
   </div>
 
@@ -100,8 +100,8 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h2 class="modal-title" id="exampleModalLabel"><b>Create New Product</b></h2>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h2 class="modal-title"><span id="modal__header">Create New Product</span></h2>
+        <button (click)="resetForm()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <form [formGroup]="productForm">
@@ -140,7 +140,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button *ngIf="percentage == 100" type="submit" class="btn btn-primary" id="submit" (click)="submit()">Save</button>
+            <button type="submit" class="btn btn-primary" id="submit" data-bs-dismiss="modal" (click)="submit()">Save</button>
 <!--            <button  type="submit" class="btn btn-primary" id="submit" data-bs-dismiss="modal" (click)="submit()">Save</button>-->
           </div>
         </form>

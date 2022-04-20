@@ -54,7 +54,7 @@ export class SellerService {
   }
 
   updateProduct(id: any, product: Product): Observable<Product> {
-    return this.http.put<Product>(this.API_SELLER + `${id}`, product);
+    return this.http.put<Product>(this.API_SELLER + `update/${id}`, product);
   }
 
   getProductById(id: number): Observable<Product> {
