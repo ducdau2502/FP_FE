@@ -137,9 +137,8 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <!--            <button *ngIf="percentage != 100" disabled type="submit" class="btn btn-primary" id="submit" (click)="submit()">Save</button>-->
-            <button type="submit" class="btn btn-primary" id="submit" data-bs-dismiss="modal" (click)="submit()">Save
-            </button>
+            <button *ngIf="percentage == 100" type="submit" class="btn btn-primary" id="submit" (click)="submit()">Save</button>
+<!--            <button  type="submit" class="btn btn-primary" id="submit" data-bs-dismiss="modal" (click)="submit()">Save</button>-->
           </div>
         </form>
       </div>
