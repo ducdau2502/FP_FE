@@ -1,0 +1,22 @@
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th>#</th>
+    <th>Date Created</th>
+    <th>Name</th>
+    <th>Quantity</th>
+    <th>Total Price</th>
+    <th>Store</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let b of bills; index as i">
+    <td> {{i + 1}} </td>
+    <td>{{b.dateCreate}}</td>
+    <td>{{b.product?.name}}</td>
+    <td>{{b.quantity}}</td>
+    <td>{{b.totalPrice}}</td>
+    <td>{{b.product?.store?.name}}</td>
+  </tr>
+  </tbody>
+</table>

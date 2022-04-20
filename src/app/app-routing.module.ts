@@ -14,6 +14,7 @@ import { SProductListComponent } from './component/seller/s-product-list/s-produ
 import {EditProductComponent} from "./component/seller/edit-product/edit-product.component";
 import {CartComponent} from "./component/cart/cart.component";
 import {StoreLikeComponent} from "./component/home/store-like/store-like.component";
+import { BoughtComponent } from './component/bought/bought.component';
 
 const routes: Routes = [
   {
@@ -72,11 +73,15 @@ const routes: Routes = [
   {
     path:"cus-cart",
     component: CartComponent
+  },
+  {
+    path: "bought",
+    component: BoughtComponent
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {scrollPositionRestoration: 'enabled'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

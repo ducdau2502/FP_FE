@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import {environment} from "../../environments/environment.prod";
 import {Observable} from "rxjs";
 import {Store} from "../model/store";
+import {StoreRating} from "../model/store-rating";
 
 @Injectable({
   providedIn: 'root'
@@ -63,5 +64,25 @@ export class CustomerService {
   addBill(account_id: any): Observable<any> {
     // @ts-ignore
     return this.http.post(this.API_CUSTOMER + `pay/${account_id}`);
+  }
+
+  //create rating
+  createRating(rating: StoreRating): Observable<any> {
+    return this.http.post(this.API_CUSTOMER + `create-rating`, rating);
+  }
+
+  //Get Discount
+  getDiscount(store_id: any): Observable<any> {
+    return this.http.get(this.API_CUSTOMER + `get-discount/${store_id}`);
+  }
+
+  //Get bills by customer_id
+  getBills(customer_id: any): Observable<any> {
+    return this.http.get(this.API_CUSTOMER + `get-bill/${customer_id}`);
+  }
+
+  //Get Total
+  getTotal(customer_id: any): Observable<any> {
+    return this.http.get(this.API_CUSTOMER + `get-total/${customer_id}`);
   }
 }

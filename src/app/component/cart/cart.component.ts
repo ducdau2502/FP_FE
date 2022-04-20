@@ -3,6 +3,7 @@ import {CustomerService} from "../../service/customer.service";
 import {TokenStorageService} from "../../service/auth/token-storage.service";
 import {Cart} from "../../model/cart";
 import {NgToastService} from "ng-angular-popup";
+import {Voucher} from "../../model/voucher";
 
 @Component({
   selector: 'app-cart',
@@ -15,6 +16,8 @@ export class CartComponent implements OnInit {
   isLoggedIn = false;
   showCustomerBoard = false;
   carts!: Cart[];
+  discount?: number;
+  sum?: number;
 
   constructor(private customerService: CustomerService,
               private tokenStorageService: TokenStorageService,
@@ -28,6 +31,7 @@ export class CartComponent implements OnInit {
       this.showCustomerBoard = this.roles.includes('ROLE_CUSTOMER');
       this.id = user.id;
       this.getAllCart();
+      this.getTotal();
     }
   }
 
@@ -41,12 +45,14 @@ export class CartComponent implements OnInit {
   minusQuantity(product_id: any) {
     this.customerService.minusQuantity(this.id, product_id).subscribe(() => {
       this.getAllCart();
+      this.getTotal();
     });
   }
 
   plusQuantity(product_id: any) {
     this.customerService.plusQuantity(this.id, product_id).subscribe(() => {
       this.getAllCart();
+      this.getTotal();
     });
   }
 
@@ -54,6 +60,7 @@ export class CartComponent implements OnInit {
     this.customerService.deleteProduct(this.id, product_id).subscribe(() => {
       this.toast.success({detail:"Successful Message", summary: "Delete Product Successful", duration: 5000})
       this.getAllCart();
+      this.getTotal();
     })
   }
 
@@ -61,7 +68,26 @@ export class CartComponent implements OnInit {
     this.customerService.addBill(this.id).subscribe(() => {
       this.toast.success({detail:"Successful Message", summary: "Pay Money Successful", duration: 5000})
       this.getAllCart();
+      this.getTotal();
+      this.sum = 0;
     })
   }
 
+  getTotalPrice(cart: Cart) {
+    // @ts-ignore
+    return cart.quantity * cart.product?.price;
+  }
+
+  getTotal() {
+    this.customerService.getTotal(this.id).subscribe(data => {
+      this.sum = data;
+    })
+  }
+
+  // getDiscount(cart: Cart) {
+  //   this.customerService.getDiscount(cart.product?.store?.id).subscribe(data => {
+  //     this.discount = data.discount;
+  //   })
+  //   return this.discount;
+  // }
 }
