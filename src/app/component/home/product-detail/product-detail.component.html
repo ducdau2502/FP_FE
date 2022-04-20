@@ -45,12 +45,18 @@
             Name: {{product?.name}}
           </h4>
 
-          <span class="mtext-106 cl2">
+          <p class="mtext-106 cl2">
 							Price: $ {{product?.price}}
-						</span>
+						</p>
 
-          <p class="stext-102 cl3 p-t-23">
-            {{product?.store?.name}}
+          <p class="mtext-106 cl2">
+            Store: {{product?.store?.name}}
+          </p>
+          <p class="mtext-106 cl2">
+            Items left: {{product.inventoryQuantity}}
+          </p>
+          <p class="mtext-106 cl2">
+            Sold: {{product.soldQuantity}}
           </p>
 
           <!--  -->
@@ -69,9 +75,13 @@
 <!--                  </div>-->
 <!--                </div>-->
 
-                <button (click)="addCart()" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+                <button *ngIf="product.inventoryQuantity != 0" (click)="addCart()" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
                   Add to cart
                 </button>
+                <button *ngIf="product.inventoryQuantity == 0" disabled class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+                  Sold out
+                </button>
+
               </div>
             </div>
           </div>
