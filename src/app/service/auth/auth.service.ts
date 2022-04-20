@@ -22,10 +22,15 @@ export class AuthService {
            password:string,
            fullName:string,
            age : number,
+           gender: string,
            address: string,
            identityCard: string,
+           avatar : string,
            bankAccount:number,
-           statusName:string):
+           statusName:string
+
+           // gender : string,
+  ):
     Observable<any> {
     return this.http.post(AUTH_API + 'sign-up', {
       username,
@@ -33,8 +38,11 @@ export class AuthService {
       password,
       fullName,
       age,
+      gender,
       address,
       identityCard,
+      avatar,
+      // gender,
       bankAccount,
       statusName
     }, httpOptions);

@@ -44,6 +44,11 @@ export class SProductListComponent implements OnInit {
     name: new FormControl("")
   })
 
+  storeForm = new FormGroup({
+    name: new FormControl(""),
+    description: new FormControl("")
+  })
+
   voucherForm = new FormGroup({
     name: new FormControl(""),
     discount: new FormControl("")
@@ -158,6 +163,20 @@ export class SProductListComponent implements OnInit {
 
       this.productForm.reset();
       this.getAllProducts();
+    });
+  }
+
+  submitStore(): void {
+    const Store = {
+      name: this.storeForm.value.name,
+      description: this.storeForm.value.description,
+      avatar: this.currentFileUpload?.url
+    };
+
+    this.sellerService.saveStore(this.store.id, Store).subscribe( () => {
+        this.toast.success({detail:"Successful Message", summary: "Update Information Successful", duration: 5000})
+      this.storeForm.reset();
+      this.getUser();
     });
   }
 

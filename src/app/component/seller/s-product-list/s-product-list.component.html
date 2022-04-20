@@ -36,6 +36,9 @@
   <button type="button" class="btn btn-primary" style="margin-right: 10px" data-bs-toggle="modal" data-bs-target="#modalVoucher">
     Voucher
   </button>
+  <button type="button" class="btn btn-primary" style="margin-right: 10px" data-bs-toggle="modal" data-bs-target="#modalStore">
+    Update Infor Store
+  </button>
 
   <div class="panel-search w-full p-t-10 p-b-15">
     <div class="bor8 dis-flex p-l-15">
@@ -310,6 +313,54 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             <button type="submit" class="btn btn-primary" (click)="getRevenue()">Get</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal store -->
+<div class="modal fade" id="modalStore" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" ><b>Update Information Store</b></h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="storeForm">
+          <div class="mb-3">
+            <label for="name" class="form-label">Name Store:</label>
+            <input class="form-control" id="nameStore" formControlName="name" type="text">
+          </div>
+          <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <input class="form-control" id="description" formControlName="description" type="text">
+          </div>
+          <input
+            type="file"
+            class="text-nowrap text-truncate"
+            (change)="selectFile($event)"
+          />
+          <div *ngIf="currentFileUpload" class="progress mt-2">
+            <div
+              class="progress-bar progress-bar-info"
+              role="progressbar"
+              attr.aria-valuenow="{{ percentage }}"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              [ngStyle]="{ width: percentage + '%' }"
+            >
+              {{ percentage }}%
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <!--            <button *ngIf="percentage != 100" disabled type="submit" class="btn btn-primary" id="submit" (click)="submit()">Save</button>-->
+            <button  type="submit" class="btn btn-primary"  data-bs-dismiss="modal" (click)="submitStore()">Save</button>
           </div>
         </form>
       </div>

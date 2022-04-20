@@ -4,14 +4,12 @@ import {environment} from "../../environments/environment.prod";
 import {Observable} from "rxjs";
 import {AccountDetail} from "../model/account-detail";
 import {Store} from "../model/store";
-
 @Injectable({
   providedIn: 'root'
 })
 export class AdminService {
 
   private API_ADMIN = environment.API_LOCAL + 'admin/dashboard';
-
   constructor(private http: HttpClient) { }
 
   getAllAccount(params: any): Observable<AccountDetail[]> {
@@ -35,5 +33,9 @@ export class AdminService {
     return this.http.get<AccountDetail>(this.API_ADMIN + `/detail-account/${id}`);
   }
 
+  accept(acceptRequest: any):Observable<any>{
+    console.log(acceptRequest)
+    return this.http.post(this.API_ADMIN + '/accept/account', acceptRequest)
+  }
 
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {AdminService} from "../../../service/admin.service";
 import {AccountDetail} from "../../../model/account-detail";
+import {newArray} from "@angular/compiler/src/util";
+import {AcceptRequest} from "../../../model/AcceptRequest";
 
 @Component({
   selector: 'app-ad-account-list',
@@ -8,6 +10,7 @@ import {AccountDetail} from "../../../model/account-detail";
   styleUrls: ['./ad-account-list.component.css']
 })
 export class AdAccountListComponent implements OnInit {
+
 
   accounts!: AccountDetail[];
 
@@ -18,8 +21,8 @@ export class AdAccountListComponent implements OnInit {
   count = 0;
   pageSize = 3;
   pageSizes = [3, 6, 9];
-
-  constructor(private adminService: AdminService) { }
+  constructor(private adminService: AdminService) {
+  }
 
   ngOnInit() {
     this.getAllAccount()
@@ -44,7 +47,7 @@ export class AdAccountListComponent implements OnInit {
     this.adminService.getAllAccount(params).subscribe(
       response => {
         // @ts-ignore
-        const { accounts, totalItems } = response;
+        const {accounts, totalItems} = response;
         this.accounts = accounts;
         this.count = totalItems;
         console.log(response);
@@ -55,6 +58,7 @@ export class AdAccountListComponent implements OnInit {
     this.page = event;
     this.getAllAccount();
   }
+
   handlePageSizeChange(event: any): void {
     this.pageSize = event.target.value;
     this.page = 1;
@@ -73,5 +77,14 @@ export class AdAccountListComponent implements OnInit {
 
   saveId(id: any, name: string) {
     localStorage.setItem(name, id);
+  }
+
+  accept(idAcc: any) {
+  const acceptRequest: any = {
+    idAcc,
+    role :["seller"]
+    }
+    this.adminService.accept(acceptRequest).subscribe(console.log);
+  console.log("min " + acceptRequest.role)
   }
 }

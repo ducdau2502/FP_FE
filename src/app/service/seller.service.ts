@@ -83,4 +83,8 @@ export class SellerService {
     return this.http.delete(this.API_SELLER + `delete-voucher/${id}`);
   }
 
+  saveStore(id : any, store:Store): Observable<any>{
+    return this.http.post(this.API_SELLER + `updateStore/${id}`,store)
+  }
+
 }

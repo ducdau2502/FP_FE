@@ -12,4 +12,5 @@ export interface AccountDetail {
    bankAccount?: number
    status?: string;
    account?: Account;
+   roles?: string[];
 }

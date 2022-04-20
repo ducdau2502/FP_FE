@@ -1,4 +1,3 @@
-
 <div class="main">
 
   <!-- Sign up form -->
@@ -27,27 +26,34 @@
                 maxlength="20"
                 #username="ngModel"
                 placeholder="Your Name"/>
-<!--              <div class="alert-danger" *ngIf="username.errors && f.submitted">-->
-<!--                <div *ngIf="username.errors['required']">Username is required</div>-->
-<!--                <div *ngIf="username.errors['minlength']">-->
-<!--                  Username must be at least 3 characters-->
-<!--                </div>-->
-<!--                <div *ngIf="username.errors['maxlength']">-->
-<!--                  Username must be at most 20 characters-->
-<!--                </div>-->
-<!--              </div>-->
+              <div class="alert-danger" *ngIf="username.errors && f.submitted">
+                <div *ngIf="username.errors['required']">Username is required</div>
+                <div *ngIf="username.errors['minlength']">
+                  Username must be at least 3 characters
+                </div>
+                <div *ngIf="username.errors['maxlength']">
+                  Username must be at most 20 characters
+                </div>
+              </div>
             </div>
 
             <div class="form-group">
-              <label form="email"><i class="zmdi zmdi-email"></i></label>
-              <input  type="email"
-                      class="form-control"
-                      name="email"
-                      [(ngModel)]="form.email"
-                      required
-                      email
-                      #email="ngModel"
-              />
+              <label for="email"><i class="zmdi zmdi-email"></i></label>
+              <input
+                type="email"
+                class="form-control"
+                name="email"
+                id="email"
+                [(ngModel)]="form.email"
+                required
+                email
+                #email="ngModel">
+              <div class="alert-danger" *ngIf="email.errors && f.submitted">
+                <div *ngIf="email.errors['required']">Email is required</div>
+                <div *ngIf="email.errors['email']">
+                  Email must be a valid email address
+                </div>
+              </div>
             </div>
 
             <div class="form-group">
@@ -60,15 +66,22 @@
                      minlength="6"
                      #password="ngModel"
               />
+              <div class="alert-danger" *ngIf="password.errors && f.submitted">
+                <div *ngIf="password.errors['required']">Password is required</div>
+                <div *ngIf="password.errors['minlength']">
+                  Password must be at least 6 characters
+                </div>
+              </div>
             </div>
 
             <div class="form-group">
               <label form="fullName"><i class="zmdi zmdi-border-color"></i></label>
-              <input  type="text"
-                      class="form-control"
-                      name="fullName"
-                      [(ngModel)]="form.fullName"
-                      #fullName="ngModel"
+              <input type="text"
+                     class="form-control"
+                     name="fullName"
+                     [(ngModel)]="form.fullName"
+                     #fullName="ngModel"
+                     placeholder="Your full name"
               />
             </div>
 
@@ -80,7 +93,7 @@
                      class="form-control"
                      id="age"
                      [(ngModel)]="form.age"
-                     #age = "ngModel"
+                     #age="ngModel"
                      placeholder="Your Age"/>
             </div>
 
@@ -92,7 +105,7 @@
                      id="address"
                      class="form-control"
                      [(ngModel)]="form.address"
-                     #address = "ngModel"
+                     #address="ngModel"
                      placeholder="Your Address"/>
             </div>
 
@@ -104,9 +117,20 @@
                      class="form-control"
                      id="identityCard"
                      [(ngModel)]="form.identityCard"
-                     #identityCard = "ngModel"
+                     #identityCard="ngModel"
                      placeholder="Your Identity Card"/>
 
+            </div>
+
+            <div class="form-check">
+              <label for="radio-1">Female</label>
+              <input id="radio-1" name="radio" class="form-check-input" type="radio" value="Female"
+                     [(ngModel)]="form.gender">
+            </div>
+            <div class="form-check">
+              <label for="radio-2">Male</label>
+              <input id="radio-2" name="radio" class="form-check-input" type="radio" value="Male"
+                     [(ngModel)]="form.gender">
             </div>
 
 
@@ -121,13 +145,40 @@
             </div>
 
             <div class="form-group">
-              <input type="checkbox"  id="agree-term" class="agree-term"
+              <label for="avatar"><i class="zmdi zmdi-card"></i></label>
+              <input type="file"
+                     class="form-control"
+                     name="avatar"
+                     id="avatar"
+                     (change)="selectFileAvatar($event)"
+                     placeholder="Your Bank Account"/>
+            </div>
+            <div *ngIf="currentFileUpload" class="progress mt-2">
+              <div
+                class="progress-bar progress-bar-info"
+                role="progressbar"
+                attr.aria-valuenow="{{ percentage }}"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                [ngStyle]="{ width: percentage + '%' }"
+              >
+                {{ percentage }}%
+              </div>
+            </div>
+
+
+            <div class="form-group">
+              <input type="checkbox" id="agree-term" class="agree-term"
                      name="test" (change)="testCheck($event)" [(ngModel)]="form.status"
               />
-              <label for="agree-term" class="label-agree-term"><span><span></span></span>Become a brand partner <a href="#" class="term-service"> Terms of your system</a></label>
+              <label for="agree-term" class="label-agree-term"><span><span></span></span>Become a brand partner <a
+                href="#" class="term-service"> Terms of your system</a></label>
             </div>
             <div class="form-group form-button">
               <input type="submit" name="signup" id="signup" class="form-submit" value="Register"/>
+            </div>
+            <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
+              Signup failed!<br />{{ errorMessage }}
             </div>
           </form>
         </div>
