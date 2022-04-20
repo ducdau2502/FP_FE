@@ -1,5 +1,5 @@
 <div class="container">
-  <button type="button" class="btn btn-primary" style="margin-right: 10px" data-bs-toggle="modal" data-bs-target="#modalPayment">
+  <button [disabled]="!check" type="button" class="btn btn-primary" style="margin-right: 10px" data-bs-toggle="modal" data-bs-target="#modalPayment">
     Payment
   </button>
   <br>
@@ -10,6 +10,7 @@
       <th>#</th>
       <th>Name</th>
       <th>Quantity</th>
+      <th>Price</th>
       <th>Store</th>
       <th colspan="2">Action</th>
     </tr>
@@ -30,7 +31,9 @@
             <i class="fs-16 zmdi zmdi-plus"></i>
           </button>
         </div>
+        {{c.product?.inventoryQuantity}} items in left
       </td>
+      <td>{{c.product?.price}}</td>
       <td>{{c.product?.store?.name}}</td>
       <td>
         <button class="btn btn-danger" (click)="deleteProduct(c.product?.id)">
