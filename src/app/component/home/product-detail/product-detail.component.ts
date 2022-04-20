@@ -3,9 +3,7 @@ import {HomeService} from "../../../service/home.service";
 import {Product} from "../../../model/product";
 import {ProductFeedback} from "../../../model/product-feedback";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {AccountDetail} from "../../../model/account-detail";
 import {TokenStorageService} from "../../../service/auth/token-storage.service";
-import {JwtResponse} from "../../../model/response/JwtResponse";
 import {CustomerService} from "../../../service/customer.service";
 import {NgToastService} from "ng-angular-popup";
 
