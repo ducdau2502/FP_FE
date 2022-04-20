@@ -10,7 +10,7 @@
           <form
             *ngIf="!isSuccessful"
             name="form"
-            (ngSubmit)="onSubmit()"
+            (ngSubmit)="f.form.valid && onSubmit()"
             #f="ngForm"
             novalidate>
 

@@ -78,12 +78,11 @@ export class RegisterComponent implements OnInit {
         console.log(data);
         this.isSuccessful = true;
         this.isSignUpFailed = false;
-        window.location.pathname = "home";
+        this.reloadPage();
       },
       error: err => {
         this.errorMessage = err.error.message;
         this.isSignUpFailed = true;
-        this.reloadPageErr();
       }
     });
     console.log(this.form)
@@ -105,10 +104,8 @@ export class RegisterComponent implements OnInit {
       }
     }
   }
-
-
-  reloadPageErr(): void {
-    window.location.reload();
+  reloadPage(): void {
+    window.location.href ="home.html";
   }
 
 }
