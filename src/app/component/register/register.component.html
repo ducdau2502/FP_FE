@@ -25,7 +25,7 @@
                 minlength="3"
                 maxlength="20"
                 #username="ngModel"
-                placeholder="Your Name"/>
+                placeholder="Your name"/>
               <div class="alert-danger" *ngIf="username.errors && f.submitted">
                 <div *ngIf="username.errors['required']">Username is required</div>
                 <div *ngIf="username.errors['minlength']">
@@ -47,7 +47,8 @@
                 [(ngModel)]="form.email"
                 required
                 email
-                #email="ngModel">
+                #email="ngModel"
+                placeholder="abc@gmail.com">
               <div class="alert-danger" *ngIf="email.errors && f.submitted">
                 <div *ngIf="email.errors['required']">Email is required</div>
                 <div *ngIf="email.errors['email']">
@@ -65,6 +66,7 @@
                      required
                      minlength="6"
                      #password="ngModel"
+                     placeholder="******"
               />
               <div class="alert-danger" *ngIf="password.errors && f.submitted">
                 <div *ngIf="password.errors['required']">Password is required</div>
@@ -88,13 +90,13 @@
 
             <div class="form-group">
               <label form="age"><i class="zmdi zmdi-n-6-square"></i></label>
-              <input type="text"
+              <input type="number"
                      name="age"
                      class="form-control"
                      id="age"
                      [(ngModel)]="form.age"
                      #age="ngModel"
-                     placeholder="Your Age"/>
+                     placeholder="Your age"/>
             </div>
 
 
@@ -106,7 +108,7 @@
                      class="form-control"
                      [(ngModel)]="form.address"
                      #address="ngModel"
-                     placeholder="Your Address"/>
+                     placeholder="Your address"/>
             </div>
 
 
@@ -118,7 +120,7 @@
                      id="identityCard"
                      [(ngModel)]="form.identityCard"
                      #identityCard="ngModel"
-                     placeholder="Your Identity Card"/>
+                     placeholder="Your identity card"/>
 
             </div>
 
@@ -141,7 +143,7 @@
                      name="bankAccount"
                      id="bankAccount"
                      [(ngModel)]="form.bankAccount"
-                     placeholder="Your Bank Account"/>
+                     placeholder="Your bank account"/>
             </div>
 
             <div class="form-group">
@@ -151,7 +153,7 @@
                      name="avatar"
                      id="avatar"
                      (change)="selectFileAvatar($event)"
-                     placeholder="Your Bank Account"/>
+                     placeholder="Your avatar"/>
             </div>
             <div *ngIf="currentFileUpload" class="progress mt-2">
               <div
