@@ -10,13 +10,13 @@
 
           <div class="filter-col3 p-r-15 p-b-27">
             <div class="mtext-102 cl2 p-b-15">
-              {{store?.name}}
+              Store: {{store?.name}}
             </div>
 
             <ul>
               <li class="p-b-6">
 									<span class="filter-link stext-106 trans-04">
-										{{store?.storeOwner?.fullName}}
+										Seller: {{store?.storeOwner?.fullName}}
 									</span>
               </li>
 
@@ -122,7 +122,7 @@
         <!-- Block2 -->
         <div class="block2">
           <div class="block2-pic hov-img0">
-            <img src="assets/images/product-01.jpg" alt="IMG-PRODUCT">
+            <img src="{{p.coverImage}}">
 
             <a href="#"
                class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">

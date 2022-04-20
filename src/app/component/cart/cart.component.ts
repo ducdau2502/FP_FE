@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CustomerService} from "../../service/customer.service";
 import {TokenStorageService} from "../../service/auth/token-storage.service";
 import {Cart} from "../../model/cart";
@@ -19,9 +19,12 @@ export class CartComponent implements OnInit {
   discount?: number;
   sum?: number;
 
+  check?: boolean;
+
   constructor(private customerService: CustomerService,
               private tokenStorageService: TokenStorageService,
-              private toast: NgToastService) { }
+              private toast: NgToastService) {
+  }
 
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
@@ -32,6 +35,7 @@ export class CartComponent implements OnInit {
       this.id = user.id;
       this.getAllCart();
       this.getTotal();
+      this.checkQuantity();
     }
   }
 
@@ -46,6 +50,7 @@ export class CartComponent implements OnInit {
     this.customerService.minusQuantity(this.id, product_id).subscribe(() => {
       this.getAllCart();
       this.getTotal();
+      this.checkQuantity();
     });
   }
 
@@ -53,12 +58,13 @@ export class CartComponent implements OnInit {
     this.customerService.plusQuantity(this.id, product_id).subscribe(() => {
       this.getAllCart();
       this.getTotal();
+      this.checkQuantity();
     });
   }
 
   deleteProduct(product_id: any) {
     this.customerService.deleteProduct(this.id, product_id).subscribe(() => {
-      this.toast.success({detail:"Successful Message", summary: "Delete Product Successful", duration: 5000})
+      this.toast.success({detail: "Successful Message", summary: "Delete Product Successful", duration: 5000})
       this.getAllCart();
       this.getTotal();
     })
@@ -66,12 +72,15 @@ export class CartComponent implements OnInit {
 
   addBill() {
     this.customerService.addBill(this.id).subscribe(() => {
-      this.toast.success({detail:"Successful Message", summary: "Pay Money Successful", duration: 5000})
+      this.toast.success({detail: "Successful Message", summary: "Pay Money Successful", duration: 5000})
       this.getAllCart();
       this.getTotal();
       this.sum = 0;
+    }, error => {
+      this.toast.error({detail: "Error Message", summary: "Store doesn't have enough quantity", duration: 5000});
     })
   }
+
 
   getTotalPrice(cart: Cart) {
     // @ts-ignore
@@ -81,6 +90,12 @@ export class CartComponent implements OnInit {
   getTotal() {
     this.customerService.getTotal(this.id).subscribe(data => {
       this.sum = data;
+    })
+  }
+
+  checkQuantity() {
+    this.customerService.checkQuantity(this.id).subscribe(data => {
+      this.check = data;
     })
   }
 

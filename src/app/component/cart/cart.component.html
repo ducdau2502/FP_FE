@@ -1,5 +1,5 @@
 <div class="container">
-  <button type="button" class="btn btn-primary" style="margin-right: 10px" data-bs-toggle="modal" data-bs-target="#modalPayment">
+  <button [disabled]="!check" type="button" class="btn btn-primary" style="margin-right: 10px" data-bs-toggle="modal" data-bs-target="#modalPayment">
     Payment
   </button>
   <br>
@@ -10,7 +10,8 @@
       <th>#</th>
       <th>Name</th>
       <th>Quantity</th>
-      <th>Choose Product</th>
+      <th>Price</th>
+      <th>Store</th>
       <th colspan="2">Action</th>
     </tr>
     </thead>
@@ -30,10 +31,10 @@
             <i class="fs-16 zmdi zmdi-plus"></i>
           </button>
         </div>
+        {{c.product?.inventoryQuantity}} items in left
       </td>
-      <td>
-        <input type="checkbox" class="md-checkbox">
-      </td>
+      <td>{{c.product?.price}}</td>
+      <td>{{c.product?.store?.name}}</td>
       <td>
         <button class="btn btn-danger" (click)="deleteProduct(c.product?.id)">
           <i class="fa-solid fa-ban" style="margin-right: 3px"></i>
@@ -74,11 +75,11 @@
           </tr>
           </tbody>
         </table>
-        <div style="margin-top:10px"><h3><b>Total: </b> {{sum}}</h3></div>
+        <div style="margin-top:10px"><h3><b>Total: </b> ${{sum}}</h3></div>
       </div>
       <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" (click)="addBill()">Accept</button>
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-danger" data-bs-dismiss="modal" (click)="addBill()">Accept</button>
       </div>
     </div>
   </div>

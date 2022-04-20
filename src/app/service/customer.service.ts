@@ -4,6 +4,7 @@ import {environment} from "../../environments/environment.prod";
 import {Observable} from "rxjs";
 import {Store} from "../model/store";
 import {StoreRating} from "../model/store-rating";
+import {Cart} from "../model/cart";
 
 @Injectable({
   providedIn: 'root'
@@ -32,8 +33,8 @@ export class CustomerService {
   }
 
   //Hiển thị tất cả sản phẩm trong giỏ hàng
-  showCart(account_id: any): Observable<any> {
-    return this.http.get(this.API_CUSTOMER + `cart/${account_id}`);
+  showCart(account_id: any): Observable<Cart[]> {
+    return this.http.get<Cart[]>(this.API_CUSTOMER + `cart/${account_id}`);
   }
 
   //Xoá sản phẩm trong giỏ hàng
@@ -84,5 +85,10 @@ export class CustomerService {
   //Get Total
   getTotal(customer_id: any): Observable<any> {
     return this.http.get(this.API_CUSTOMER + `get-total/${customer_id}`);
+  }
+
+  //Check quantity
+  checkQuantity(customer_id: any): Observable<any> {
+    return this.http.get(this.API_CUSTOMER + `check-quantity/${customer_id}`);
   }
 }
