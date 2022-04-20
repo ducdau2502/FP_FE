@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {environment} from "../../environments/environment.prod";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {Product} from "../model/product";
 import {Observable} from "rxjs";
 import {ProductImage} from "../model/product-image";
@@ -32,6 +32,12 @@ export class SellerService {
   //tìm tất cả sản phẩm theo cửa hàng
   findAllProduct(id: any): Observable<any> {
     return this.http.get(this.API_SELLER + id);
+  }
+
+  //tìm tất cả sản phẩm theo cửa hàng và tên gần đúng
+  findAllProductByStoreAndName(id: any, mess: string): Observable<any> {
+    let params = new HttpParams().set("search_product", mess);
+    return this.http.get<Product[]>(this.API_SELLER + `find-by-name/${id}`, {params});
   }
 
   //Xoá sản phẩm
@@ -81,6 +87,10 @@ export class SellerService {
 
   deleteVoucher(id: any): Observable<any> {
     return this.http.delete(this.API_SELLER + `delete-voucher/${id}`);
+  }
+
+  saveStore(id : any, store:Store): Observable<any>{
+    return this.http.post(this.API_SELLER + `updateStore/${id}`,store)
   }
 
 }

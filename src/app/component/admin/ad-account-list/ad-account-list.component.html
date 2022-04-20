@@ -46,6 +46,7 @@
         <th>Username</th>
         <th>Email</th>
         <th>Avatar</th>
+        <th>Action</th>
       </tr>
       </thead>
       <tbody>
@@ -68,6 +69,9 @@
         <td>{{a.account?.username}}</td>
         <td>{{a.account?.email}}</td>
         <td><img src="{{a.avatar}}" alt="Error" style="width: 50px; height: auto"></td>
+<td>
+  <button class="btn btn-primary" *ngIf="a.status == 'Waiting'" (click)="accept(a.id)"><i class="fa-regular fa-circle-check" style="margin-right: 3px"></i>Accept</button>
+</td>
       </tr>
       </tbody>
     </table>

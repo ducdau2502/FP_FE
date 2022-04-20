@@ -589,5 +589,7 @@ label.valid:after {
   .social-label {
     margin-right: 0px;
     margin-bottom: 10px; } }
-
+#gender{
+  -moz-box-flex: inherit;
+}
 /*# sourceMappingURL=style.css.map */

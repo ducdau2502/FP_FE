@@ -24,17 +24,24 @@
     </ul>
   </div>
 
-  <button type="button" class="btn btn-primary" style="margin-right: 10px" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  <button type="button" class="btn btn-primary" style="margin-right: 10px" data-bs-toggle="modal"
+          data-bs-target="#exampleModal">
     Add Product
   </button>
-  <button type="button" class="btn btn-primary" style="margin-right: 10px" data-bs-toggle="modal" data-bs-target="#modalCategory">
+  <button type="button" class="btn btn-primary" style="margin-right: 10px" data-bs-toggle="modal"
+          data-bs-target="#modalCategory">
     Category
   </button>
-  <button type="button" class="btn btn-primary" style="margin-right: 10px" data-bs-toggle="modal" data-bs-target="#modalRevenue">
+  <button type="button" class="btn btn-primary" style="margin-right: 10px" data-bs-toggle="modal"
+          data-bs-target="#modalRevenue">
     Revenue
   </button>
-  <button type="button" class="btn btn-primary" style="margin-right: 10px" data-bs-toggle="modal" data-bs-target="#modalVoucher">
+  <button type="button" class="btn btn-primary" style="margin-right: 10px" data-bs-toggle="modal"
+          data-bs-target="#modalVoucher">
     Voucher
+  </button>
+  <button type="button" class="btn btn-primary" style="margin-right: 10px" data-bs-toggle="modal" data-bs-target="#modalStore">
+    Update Infor Store
   </button>
 
   <div class="panel-search w-full p-t-10 p-b-15">
@@ -61,18 +68,19 @@
     <tbody>
     <tr *ngFor="let p of products; index as i">
       <td> {{i + 1}} </td>
-      <td>{{p.name}}</td>
+      <td style="max-width: 100px"><span class="description_product">{{p.name}}</span></td>
       <td>{{p.price}}</td>
       <td>{{p.inventoryQuantity}}</td>
       <td>{{p.soldQuantity}}</td>
-      <td>{{p.description}}</td>
-      <td><img src="{{p.coverImage}}" alt="Error" style="width: 50px; height: auto"></td>
+      <td style="max-width: 250px"><span class="description_product">{{p.description}}</span></td>
+      <td style="width: 50px; height: 40px"><img src="{{p.coverImage}}" alt="Error" style="width: 100%; height: auto"></td>
       <td>
         <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal"
                 (click)="editProduct(p.id)">
           <i class="fa-regular fa-circle-check" style="margin-right: 3px"></i>
           Edit
-        </button> |
+        </button>
+        |
         <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete"
                 (click)="getProductById(p.id)">
           <i class="fa-solid fa-ban" style="margin-right: 3px"></i>
@@ -114,7 +122,7 @@
             <textarea class="form-control" id="description-p" formControlName="description"></textarea>
           </div>
           <input
-            type="file"
+            type="file" #inputFile
             class="text-nowrap text-truncate"
             (change)="selectFile($event)"
           />
@@ -147,11 +155,24 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h2 class="modal-title" ><b>Category</b></h2>
+        <h2 class="modal-title"><b>Category</b></h2>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-    <h3>List Category</h3>
+        <button class="btn btn-primary" (click)="showFormCategory()">Create New Category</button>
+        <form [formGroup]="categoryForm" id="showFormCategory" style="display: none">
+          <div class="mb-3">
+            <label for="nameCategory" class="form-label">Name:</label>
+            <input class="form-control" id="nameCategory" formControlName="name" type="text">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" (click)="createCategory()">Save
+            </button>
+          </div>
+        </form>
+
+        <h3>List Category</h3>
         <table class="table table-hover">
           <thead>
           <tr>
@@ -164,23 +185,12 @@
           <tr *ngFor="let c of categories; index as i">
             <td> {{i + 1}} </td>
             <td>{{c.name}}</td>
-            <td >
+            <td>
               <button class="btn btn-primary" (click)="saveCategory(c.id)" data-bs-dismiss="modal">Change</button>
             </td>
           </tr>
           </tbody>
         </table>
-        <h3>Create New Category</h3>
-        <form [formGroup]="categoryForm">
-          <div class="mb-3">
-            <label for="nameCategory" class="form-label">Name:</label>
-            <input class="form-control" id="nameCategory" formControlName="name" type="text">
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" (click)="createCategory()">Save</button>
-          </div>
-        </form>
       </div>
 
     </div>
@@ -192,15 +202,17 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h2 class="modal-title" ><b>Delete Product</b></h2>
+        <h2 class="modal-title"><b>Delete Product</b></h2>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <h4>Are you sure you want to delete this product ?</h4>
       </div>
       <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      <button type="submit" class="btn btn-danger" data-bs-dismiss="modal" (click)="deleteProduct(productDelete.id)">Delete</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-danger" data-bs-dismiss="modal" (click)="deleteProduct(productDelete.id)">
+          Delete
+        </button>
       </div>
     </div>
   </div>
@@ -211,10 +223,26 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h2 class="modal-title" ><b>Voucher</b></h2>
+        <h2 class="modal-title"><b>Voucher</b></h2>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
+        <button class="btn btn-primary" (click)="showFormVoucher()">Create New Voucher</button>
+        <form [formGroup]="voucherForm" id="showFormVoucher" style="display: none">
+          <div class="mb-3">
+            <label for="nameVoucher" class="form-label">Name:</label>
+            <input class="form-control" id="nameVoucher" formControlName="name" type="text">
+          </div>
+          <div class="mb-3">
+            <label for="discount" class="form-label">Discount(%):</label>
+            <input class="form-control" id="discount" formControlName="discount" type="number">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" (click)="saveVoucher()">Save</button>
+          </div>
+        </form>
+
         <h3>List Voucher</h3>
         <table class="table table-hover">
           <thead>
@@ -230,27 +258,13 @@
             <td> {{i + 1}} </td>
             <td>{{v.name}}</td>
             <td>{{v.discount}}</td>
-            <td >
+            <td>
               <button class="btn btn-danger" (click)="deleteVoucher(v.id)">Delete</button>
             </td>
           </tr>
           </tbody>
         </table>
-        <h3>Create New Voucher</h3>
-        <form [formGroup]="voucherForm">
-          <div class="mb-3">
-            <label for="nameVoucher" class="form-label">Name:</label>
-            <input class="form-control" id="nameVoucher" formControlName="name" type="text">
-          </div>
-          <div class="mb-3">
-            <label for="discount" class="form-label">Discount(%):</label>
-            <input class="form-control" id="discount" formControlName="discount" type="number">
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary" (click)="saveVoucher()">Save</button>
-          </div>
-        </form>
+
       </div>
 
     </div>
@@ -262,13 +276,14 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h2 class="modal-title" ><b>Revenue</b></h2>
+        <h2 class="modal-title"><b>Revenue</b></h2>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <p>Total revenue: {{totalRevenue}} $</p>
-        <h3>Find bill by time</h3>
-        <form [formGroup]="revenueForm">
+        <h3>Total revenue: {{totalRevenue}} $</h3>
+
+        <button class="btn btn-primary" (click)="showFormBill()">Find bill by time</button>
+        <form [formGroup]="revenueForm" id="showFormBill" style="display: none;">
           <div class="mb-3">
             <label for="startRevenue" class="form-label">Start time:</label>
             <input class="form-control" id="startRevenue" formControlName="start" type="date">
@@ -282,6 +297,7 @@
             <button type="submit" class="btn btn-primary" (click)="getRevenue()">Get</button>
           </div>
         </form>
+
         <h3>List Revenue</h3>
         <table class="table table-hover">
           <thead>
@@ -312,6 +328,53 @@
           </tr>
           </tbody>
         </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal store -->
+<div class="modal fade" id="modalStore" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" ><b>Update Information Store</b></h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="storeForm">
+          <div class="mb-3">
+            <label for="name" class="form-label">Name Store:</label>
+            <input class="form-control" id="nameStore" formControlName="name" type="text">
+          </div>
+          <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <input class="form-control" id="description" formControlName="description" type="text">
+          </div>
+          <input
+            type="file"
+            class="text-nowrap text-truncate"
+            (change)="selectFile($event)"
+          />
+          <div *ngIf="currentFileUpload" class="progress mt-2">
+            <div
+              class="progress-bar progress-bar-info"
+              role="progressbar"
+              attr.aria-valuenow="{{ percentage }}"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              [ngStyle]="{ width: percentage + '%' }"
+            >
+              {{ percentage }}%
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <!--            <button *ngIf="percentage != 100" disabled type="submit" class="btn btn-primary" id="submit" (click)="submit()">Save</button>-->
+            <button  type="submit" class="btn btn-primary"  data-bs-dismiss="modal" (click)="submitStore()">Save</button>
+          </div>
+        </form>
       </div>
 
     </div>

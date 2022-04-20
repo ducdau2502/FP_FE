@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { SellerService } from 'src/app/service/seller.service';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {SellerService} from 'src/app/service/seller.service';
 import {Product} from "../../../model/product";
 import {Store} from "../../../model/store";
 import {ProductImage} from "../../../model/product-image";
@@ -21,6 +21,8 @@ import {RevenueTime} from "../../../model/response/revenue-time";
   styleUrls: ['./s-product-list.component.css']
 })
 export class SProductListComponent implements OnInit {
+  @ViewChild('inputFile') myInputVariable: ElementRef | undefined;
+
   products: Product[] = [];
   productDelete!: Product;
   store!: Store;
@@ -44,6 +46,11 @@ export class SProductListComponent implements OnInit {
     name: new FormControl("")
   })
 
+  storeForm = new FormGroup({
+    name: new FormControl(""),
+    description: new FormControl("")
+  })
+
   voucherForm = new FormGroup({
     name: new FormControl(""),
     discount: new FormControl("")
@@ -54,15 +61,16 @@ export class SProductListComponent implements OnInit {
     end: new FormControl("")
   })
 
-  idUser= this.tokenService.getUser().id;
+  idUser = this.tokenService.getUser().id;
 
   constructor(private sellerService: SellerService,
               private customerService: HomeService,
               private tokenService: TokenStorageService,
-              private uploadService : FileUploadService,
+              private uploadService: FileUploadService,
               private toast: NgToastService,
               private fb: FormBuilder,
-              private tokenStorageService: TokenStorageService) { }
+              private tokenStorageService: TokenStorageService) {
+  }
 
   ngOnInit(): void {
     this.productForm = this.fb.group({
@@ -75,20 +83,20 @@ export class SProductListComponent implements OnInit {
     });
 
     if (!!this.tokenStorageService.getToken()) {
-        this.getUser()
+      this.getUser()
     }
   }
 
   getUser() {
     this.customerService.findAccountById(this.idUser).subscribe(data => {
         this.user = data;
-      this.customerService.findStoreByOwnerId(data.id).subscribe(store => {
-        this.store = store;
-        this.getAllProducts();
-        this.getAllCategories();
-        this.getAllVoucher();
-        this.getTotalRevenue();
-      })
+        this.customerService.findStoreByOwnerId(data.id).subscribe(store => {
+          this.store = store;
+          this.getAllProducts();
+          this.getAllCategories();
+          this.getAllVoucher();
+          this.getTotalRevenue();
+        })
       }
     );
   }
@@ -112,10 +120,10 @@ export class SProductListComponent implements OnInit {
   }
 
   deleteProduct(id: any) {
-      this.sellerService.deleteProduct(id).subscribe(() => {
-        this.toast.success({detail:"Successful Message", summary: "Delete Product Successful", duration: 5000})
-        this.getAllProducts();
-      })
+    this.sellerService.deleteProduct(id).subscribe(() => {
+      this.toast.success({detail: "Successful Message", summary: "Delete Product Successful", duration: 5000})
+      this.getAllProducts();
+    })
   }
 
   saveId(id: any, name: string) {
@@ -131,9 +139,6 @@ export class SProductListComponent implements OnInit {
         this.currentFileUpload = new FileUpload(file);
         this.uploadService.pushFileToStorage(this.currentFileUpload).subscribe(percentage => {
           this.percentage = Math.round(percentage ? percentage : 0);
-
-        }, error => {console.log(error);
-
         });
       }
     }
@@ -149,15 +154,32 @@ export class SProductListComponent implements OnInit {
       coverImage: this.currentFileUpload?.url
     };
 
-    this.sellerService.createProduct(this.store.id, product).subscribe( () => {
+    this.sellerService.createProduct(this.store.id, product).subscribe(() => {
       if (product.id == '') {
-        this.toast.success({detail:"Successful Message", summary: "Create Product Successful", duration: 5000})
+        this.toast.success({detail: "Successful Message", summary: "Create Product Successful", duration: 5000})
       } else {
-        this.toast.success({detail:"Successful Message", summary: "Update Product Successful", duration: 5000})
+        this.toast.success({detail: "Successful Message", summary: "Update Product Successful", duration: 5000})
       }
 
+      // @ts-ignore
+      this.myInputVariable.nativeElement.value = '';
+      this.percentage = 0;
       this.productForm.reset();
       this.getAllProducts();
+    });
+  }
+
+  submitStore(): void {
+    const Store = {
+      name: this.storeForm.value.name,
+      description: this.storeForm.value.description,
+      avatar: this.currentFileUpload?.url
+    };
+
+    this.sellerService.saveStore(this.store.id, Store).subscribe( () => {
+        this.toast.success({detail:"Successful Message", summary: "Update Information Successful", duration: 5000})
+      this.storeForm.reset();
+      this.getUser();
     });
   }
 
@@ -173,7 +195,7 @@ export class SProductListComponent implements OnInit {
     if (this.message == "") {
       this.getAllProducts();
     } else {
-      this.customerService.searchProductByNameContaining(this.message).subscribe(data => {
+      this.sellerService.findAllProductByStoreAndName(this.store.id ,this.message).subscribe(data => {
         this.products = data;
       })
     }
@@ -192,6 +214,8 @@ export class SProductListComponent implements OnInit {
     this.sellerService.createCategory(category).subscribe(() => {
       this.getAllCategories();
       this.categoryForm.reset();
+      // @ts-ignore
+      document.getElementById("showFormCategory").style.display = "none";
     })
   }
 
@@ -216,6 +240,8 @@ export class SProductListComponent implements OnInit {
     this.sellerService.createVoucher(voucher).subscribe(() => {
       this.getAllVoucher();
       this.voucherForm.reset();
+      // @ts-ignore
+      document.getElementById("showFormVoucher").style.display = "none";
     })
   }
 
@@ -233,9 +259,11 @@ export class SProductListComponent implements OnInit {
     this.sellerService.getRevenue(this.store.id, this.time).subscribe(
       response => {
         // @ts-ignore
-        const { bills, totalRevenue } = response;
+        const {bills, totalRevenue} = response;
         this.bills = bills;
         this.revenue = totalRevenue;
+        // @ts-ignore
+        document.getElementById("showFormBill").style.display = "none";
       });
   }
 
@@ -243,10 +271,25 @@ export class SProductListComponent implements OnInit {
     this.sellerService.getAllRevenue(this.store.id).subscribe(
       response => {
         // @ts-ignore
-        const { bills, totalRevenue } = response;
+        const {bills, totalRevenue} = response;
         this.bills = bills;
         this.totalRevenue = totalRevenue;
       });
   }
 
+  showFormCategory() {
+    // @ts-ignore
+    document.getElementById("showFormCategory").style.display = "block";
+  }
+
+
+  showFormVoucher() {
+    // @ts-ignore
+    document.getElementById("showFormVoucher").style.display = "block";
+  }
+
+  showFormBill() {
+    // @ts-ignore
+    document.getElementById("showFormBill").style.display = "block";
+  }
 }

@@ -59,7 +59,7 @@
         <div class="tab-pane fade" id="reviews" role="tabpanel">
           <div class="row">
             <div class="col-sm-10 col-md-8 col-lg-6 m-lr-auto">
-              <div class="p-b-30 m-lr-15-sm" *ngIf="showCustomerBoard">
+              <div class="p-b-30 m-lr-15-sm">
                 <!-- Review -->
                 <div class="flex-w flex-t p-b-68" *ngFor="let r of ratings">
                   <div class="wrap-pic-s size-109 bor0 of-hidden m-r-18 m-t-6">
@@ -80,7 +80,7 @@
                 </div>
 
                 <!-- Add review -->
-                <div class="flex-w flex-m p-t-50 p-b-23">
+                <div class="flex-w flex-m p-t-50 p-b-23" *ngIf="showCustomerBoard">
 												<span class="stext-102 cl3 m-r-16">
 													Your Rating
 												</span>

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from "../../service/auth/auth.service";
 import {FormArray, FormBuilder} from "@angular/forms";
+import {FileUpload} from "../../model/file-upload.model";
+import {FileUploadService} from "../../service/file-upload.service";
 
 @Component({
   selector: 'app-register',
@@ -14,43 +16,61 @@ export class RegisterComponent implements OnInit {
     password: null,
     fullName:null,
     age : null,
+    gender : null,
     address: null,
     identityCard: null,
+    avatar : null,
+
     bankAccount:null,
     statusName:null,
+
   };
   isSuccessful = false;
   isSignUpFailed = false;
   errorMessage = '';
   isStatus = false;
 
-  constructor(private authService: AuthService,fb: FormBuilder) {
+  selectedFiles?: FileList;
+  currentFileUpload?: FileUpload;
+  percentage = 0;
+
+  constructor(private authService: AuthService,
+              private fb: FormBuilder,
+              private uploadService : FileUploadService) {
   }
   ngOnInit(): void {
   }
   testCheck(event:any){
     console.log(event.target.checked)
+    this.isStatus = event.target.checked
+    console.log(this.isStatus)
 
   }
 
   onSubmit(): void {
 
     if (this.isStatus){
-      this.form.statusName = "waiting";
-    } else {
-      this.form.statusName = "no";
+      this.form.statusName = "Waiting";
+    } else{
+      this.form.statusName = "Activated";
     }
-    console.log(this.form.statusName)
+    console.log(this.form.statusName);
+    this.form.avatar = this.currentFileUpload?.url;
     const { username, email, password,
-      fullName,age,address,identityCard,bankAccount,statusName} = this.form
+      fullName,age,gender,address,identityCard,avatar, bankAccount,statusName
+    } = this.form
 
-    this.authService.register(username,
+    this.authService.register(
+      username,
       email,
       password,
       fullName,
       age,
+      gender,
       address,
       identityCard,
+      avatar,
+      // gender,
       bankAccount,
       statusName
     ).subscribe({
@@ -65,9 +85,27 @@ export class RegisterComponent implements OnInit {
         this.isSignUpFailed = true;
       }
     });
+    console.log(this.form)
   }
 
+  selectFileAvatar(event: any): void {
+    this.selectedFiles = event.target.files;
+    if (this.selectedFiles) {
+      const file: File | null = this.selectedFiles.item(0);
+      this.selectedFiles = undefined;
+      if (file) {
+        this.currentFileUpload = new FileUpload(file);
+        this.uploadService.pushFileToStorage(this.currentFileUpload).subscribe(percentage => {
+          this.percentage = Math.round(percentage ? percentage : 0);
+
+        }, error => {console.log(error);
+
+        });
+      }
+    }
+  }
   reloadPage(): void {
     window.location.href ="home.html";
   }
+
 }
