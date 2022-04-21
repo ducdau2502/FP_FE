@@ -71,14 +71,16 @@ export class CartComponent implements OnInit {
   }
 
   addBill() {
-    this.customerService.addBill(this.id).subscribe(() => {
-      this.toast.success({detail: "Successful Message", summary: "Pay Money Successful", duration: 5000})
+    this.customerService.addBill(this.id).subscribe(data => {
+      if (data == true) {
+        this.toast.success({detail: "Successful Message", summary: "Pay Money Successful", duration: 5000})
+      } else {
+        this.toast.error({detail: "Error Message", summary: "Store doesn't have enough quantity", duration: 5000});
+      }
       this.getAllCart();
       this.getTotal();
       this.sum = 0;
-    }, error => {
-      this.toast.error({detail: "Error Message", summary: "Store doesn't have enough quantity", duration: 5000});
-    })
+    });
   }
 
 
