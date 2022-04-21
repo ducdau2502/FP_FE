@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AdminService} from "../../../service/admin.service";
 import {AccountDetail} from "../../../model/account-detail";
 import {newArray} from "@angular/compiler/src/util";
@@ -21,6 +21,7 @@ export class AdAccountListComponent implements OnInit {
   count = 0;
   pageSize = 3;
   pageSizes = [3, 6, 9];
+
   constructor(private adminService: AdminService) {
   }
 
@@ -80,11 +81,13 @@ export class AdAccountListComponent implements OnInit {
   }
 
   accept(idAcc: any) {
-  const acceptRequest: any = {
-    idAcc,
-    role :["seller"]
+    const acceptRequest: any = {
+      idAcc,
+      role: ["seller"]
     }
-    this.adminService.accept(acceptRequest).subscribe(console.log);
-  console.log("min " + acceptRequest.role)
+    this.adminService.accept(acceptRequest).subscribe(() => {
+      this.getAllAccount();
+    });
+    console.log("min " + acceptRequest.role)
   }
 }

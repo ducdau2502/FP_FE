@@ -3,6 +3,7 @@ import {AuthService} from "../../service/auth/auth.service";
 import {FormArray, FormBuilder} from "@angular/forms";
 import {FileUpload} from "../../model/file-upload.model";
 import {FileUploadService} from "../../service/file-upload.service";
+import {NgToastService} from "ng-angular-popup";
 
 @Component({
   selector: 'app-register',
@@ -36,7 +37,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(private authService: AuthService,
               private fb: FormBuilder,
-              private uploadService : FileUploadService) {
+              private uploadService : FileUploadService,
+              private toast: NgToastService) {
   }
   ngOnInit(): void {
   }
@@ -78,6 +80,7 @@ export class RegisterComponent implements OnInit {
         console.log(data);
         this.isSuccessful = true;
         this.isSignUpFailed = false;
+        this.toast.success({detail: "Successful Message", summary: "Register Successful", duration: 5000})
         this.reloadPage();
       },
       error: err => {
@@ -105,7 +108,7 @@ export class RegisterComponent implements OnInit {
     }
   }
   reloadPage(): void {
-    window.location.href ="home.html";
+    window.location.pathname ="home";
   }
 
 }

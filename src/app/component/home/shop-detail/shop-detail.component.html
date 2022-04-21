@@ -5,12 +5,12 @@
       <div class="panel-filter w-full p-t-10">
         <div class="wrap-filter flex-w bg6 w-full p-lr-40 p-t-27 p-lr-15-sm">
           <div class="filter-col1 p-r-15 p-b-27">
-            <img src="{{store?.avatar}}" style="width: 100%; height: 100%" alt="Error image">
+            <img src="{{store?.avatar}}" style="width: auto; height: 150px" alt="Error image">
           </div>
 
           <div class="filter-col3 p-r-15 p-b-27">
             <div class="mtext-102 cl2 p-b-15">
-              Store: {{store?.name}}
+              <h3>Store: {{store?.name}}</h3>
             </div>
 
             <ul>
@@ -39,7 +39,7 @@
           <a class="nav-link active" data-toggle="tab" href="#description" role="tab">Description</a>
         </li>
         <li class="nav-item p-b-10">
-          <a class="nav-link" data-toggle="tab" href="#reviews" role="tab">Reviews ({{ratings?.length}})</a>
+          <a class="nav-link" data-toggle="tab" href="#reviews" role="tab">Rating ({{ratings?.length}})</a>
         </li>
       </ul>
 
@@ -122,9 +122,9 @@
         <!-- Block2 -->
         <div class="block2">
           <div class="block2-pic hov-img0">
-            <img src="{{p.coverImage}}">
+            <img src="{{p.coverImage}}" alt="IMG-PRODUCT">
 
-            <a href="#"
+            <a [routerLink]="['/product-detail']" (click)="saveId(p.id, 'product_id')"
                class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
               Quick View
             </a>
@@ -139,19 +139,21 @@
               <span class="stext-105 cl3">
                 $ {{p.price}}
 								</span>
-              <span class="stext-105 cl3">
-									sold {{p.soldQuantity}}
+              <span *ngIf="p.inventoryQuantity == 0" class="stext-105 cl3">
+									Sold out
 								</span>
-              <a class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                {{p.store?.name}}
+              <span *ngIf="p.inventoryQuantity != 0" class="stext-105 cl3">
+									Items left: {{p.inventoryQuantity}}
+								</span>
+              <span class="stext-105 cl3">
+									Sold: {{p.soldQuantity}}
+								</span>
+              <a [routerLink]="['/store-detail']" (click)="saveId(p.store?.id, 'store_id')"
+                 class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+                Store: {{p.store?.name}}
               </a>
-            </div>
-
-            <div class="block2-txt-child2 flex-r p-t-3">
-              <a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-                <img class="icon-heart1 dis-block trans-04" src="assets/images/icons/icon-heart-01.png" alt="ICON">
-                <img class="icon-heart2 dis-block trans-04 ab-t-l" src="assets/images/icons/icon-heart-02.png"
-                     alt="ICON">
+              <a class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+                Category: {{p.store?.categoriesList?.name}}
               </a>
             </div>
           </div>
